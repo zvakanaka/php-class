@@ -5,6 +5,8 @@ crontab -e
 ```
 Add the following cron job:
 ```sh
-REPO=php-class
-*/2 * * * * cd ~/git/$REPO && echo "****** $(date) updating $REPO" >> ~/cronlog.txt && git pull >> ~/cronlog.txt && rsync -ruv --cvs-exclude ~/git/$REPO ~/public_html/ && echo "update successful">> ~/cronlog.txt > /dev/null
+REPO=$HOME/Downloads/git/php-class
+WEB_DIR=/var/www/
+LOG=$HOME/cronlog.txt
+*/2 * * * * cd $REPO && echo "****** $(date) updating $REPO" >> $LOG && git pull >> $LOG && rsync -ruv --cvs-exclude $REPO $WEB_DIR && echo "update successful">> $LOG > /dev/null
 ```
