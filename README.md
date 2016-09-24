@@ -5,6 +5,7 @@ crontab -e
 ```
 Add the following cron job:
 ```sh
+HOME=/home/adam
 REPO=$HOME/Downloads/git/php-class
 WEB_DIR=/var/www/
 LOG=$HOME/cronlog.txt
