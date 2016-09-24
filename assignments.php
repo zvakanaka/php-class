@@ -16,8 +16,8 @@
               <dl>
                 <dt>Assignments</dt>
                 <dd>Exercise 2-1 (Completed)
-                <dd>Exercise 3-1 (Not Completed)</dd>
-                <dd>Exercise 16 (Not Completed)</dd>
+                <dd>Exercise 3-1 (Completed)</dd>
+                <dd><a href="erd/music_db_adam_quinton.png">Exercise 16-1</a></dd>
                 <dd>Exercise 4-1 (Not Completed)</dd>
                 <dd>Exercise 5-1 (Not Completed)</dd>
                 <dd>Exercise 7-2 (Not Completed)</dd>
