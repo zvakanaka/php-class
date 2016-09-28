@@ -19,9 +19,9 @@
               echo '<a class="thumb-link" href="'.$dirname.substr($image, strrpos($image, "/")).'"><img class="thumb" src="'.$image.'" /></a>';
               }
             ?>
-              <p><a href="javascript:history.back()">Back</a></p>
             </article>
             <footer>
+              <a href="javascript:history.back()">Back</a>
               <span id="timestampy"><?php echo 'Last updated: <time datetime="'. date('c') . '">' . date('F j, Y', getlastmod()) . '</time>'; ?></span>
             </footer>
             </main>
