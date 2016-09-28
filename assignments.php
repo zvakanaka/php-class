@@ -15,7 +15,7 @@
           <article>
               <dl>
                 <dt>Assignments</dt>
-                <dd>Exercise 2-1 (Completed)
+                <dd><a href="murach_files/ex_starts/ch02_ex1">Exercise 2-1 (Completed)</a></dd>
                 <dd>Exercise 3-1 (Completed)</dd>
                 <dd><a href="erd/music_db_adam_quinton.png">Exercise 16-1</a></dd>
                 <dd>Exercise 4-1 (Not Completed)</dd>
