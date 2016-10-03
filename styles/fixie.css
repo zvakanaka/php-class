@@ -32,6 +32,16 @@ footer {
   padding: 5px 20px;
   color: white;
 }
+.footer-overflow {
+  /*left: 0;*/
+  width: 100%;
+  /*z-index: 9999;*/
+  height: 80px;
+  /*-webkit-margin-before: 0px;*/
+  /*padding: 5px 20px;*/
+  background-color: #00a0ee;
+  color: white;
+}
 #timestampy {
   padding-right: 5%;
   float: right;
