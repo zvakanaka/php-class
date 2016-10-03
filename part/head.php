@@ -29,5 +29,4 @@
   <body>
     <div id="page">
       <main class="column1">
-        <article>
-          <h1 id="logo" title="howtoterminal.com"><?php echo $title; ?></h1>
+        <h1 id="logo" title="howtoterminal.com"><?php echo $title; ?></h1>

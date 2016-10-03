@@ -1,12 +1,4 @@
-<div class="footer-overflow">
-  <p>
-    <a href="/superglobals.php">Teaching Presentation</a>
-  </p>
-</div>
-</article>
-
 <footer>
-  <a href="javascript:history.back()">Back</a>
   <span id="timestampy"><?php echo 'Last updated: <time datetime="'. date('c') . '">' . date('F j, Y', getlastmod()) . '</time>'; ?></span>
   <noscript id="deferred-styles">
     <link rel="stylesheet" type="text/css" href="/php-class/styles/fixie.css"/>
@@ -26,6 +18,9 @@
   </script>
 </footer>
   </main>
+</div><!-- end page  -->
+<div class="toes">
+  <a href="/php-class/superglobals.php">Teaching Presentation</a>
 </div>
 </body>
 </html>
