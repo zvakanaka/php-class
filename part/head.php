@@ -19,14 +19,15 @@
           <div id="logo" title="howtoterminal.com"><a href="/php-class/assignments.php">PHP CLASS</a></div>
         <ul id="nav-ul">
         <?php
-        $menu = array("Exercises" => "assignments.php", "Photo" => "pics.php");
+        $urlName = $path_parts[filename];
+        $menu = array("Exercises" => "assignments", "Photo" => "pics");
         foreach(array_keys($menu) as $key){
           echo '<li class="nav-li"><a ';
-          $path_parts = pathinfo("$_SERVER[REQUEST_URI]");
-          if ( ''.$path_parts['basename'] == $menu[$key] )
+          if ( ''.$urlName == $menu[$key] )
            echo "class='on' ";
           echo 'href="'.$menu[$key].'" id="'.$menu[$key].'_tab">'.$key.'</a></li>';
         }
         ?>
         </ul>
         </nav>
+<?php echo "URL NAME: $urlName of $_SERVER[REQUEST_URI]"; ?>
