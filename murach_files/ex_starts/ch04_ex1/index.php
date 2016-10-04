@@ -3,7 +3,7 @@ require_once('database.php');
 
 // Get category ID
 if (!isset($category_id)) {
-    $category_id = filter_input(INPUT_GET, 'category_id', 
+    $category_id = filter_input(INPUT_GET, 'category_id',
             FILTER_VALIDATE_INT);
     if ($category_id == NULL || $category_id == FALSE) {
         $category_id = 1;
@@ -65,7 +65,7 @@ $statement3->closeCursor();
             </li>
             <?php endforeach; ?>
         </ul>
-        </nav>          
+        </nav>
     </aside>
 
     <section>
