@@ -2,11 +2,17 @@
 <article>
 
 <?php
-  $dirname = "../photo/4th";
-  $images = glob($dirname."/.thumb/*.JPG");
-  foreach($images as $image) {
-  echo '<a class="thumb-link" href="'.$dirname.substr($image, strrpos($image, "/")).'"><img class="thumb" src="'.$image.'" /></a>';
+  $album = $_GET['album'];
+  $dirname = "../photo";
+  $images = glob($dirname."/$album"."/.thumb/*.JPG");
+  if (count($images) ) {
+    foreach($images as $image) {
+      echo '<a class="thumb-link" href="'.$dirname."/$album".substr($image, strrpos($image, "/")).'"><img class="thumb" src="'.$image.'" /></a>';
+    }
+  } else {
+
   }
+
   echo '<div class="bottom-spacer"></div>';
 ?>
 </article>

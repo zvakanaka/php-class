@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <nav role="navigation">
-    <ul>
-    <?php
-    // $menu = array("Raspberry Pi" => "/raspberry_pi", "Commands" => "/commands", "Folio" => "/folio", "Photo" => "/photo", "Rand" => "/rand");
-    // foreach(array_keys($menu) as $key){
-    //   echo '<li class="nav-li"><a ';
-    //   $path_parts = pathinfo("$_SERVER[REQUEST_URI]");
-    //   if ( '/'.$path_parts['basename'] == $menu[$key] )
-    //    echo "class='on' ";
-    //   echo 'href="'.$menu[$key].'" id="'.$menu[$key].'_tab">'.$key.'</a></li>';
-    // }
-    ?>
-    </ul>
-    </nav>
     <?php
       $urlName = $_SERVER['PHP_SELF'];
       $path_parts = pathinfo("$urlName");
@@ -29,4 +15,18 @@
   <body>
     <div id="page">
       <main class="column1">
-        <h1 id="logo" title="howtoterminal.com"><?php echo $title; ?></h1>
+        <nav role="navigation">
+          <div id="logo" title="howtoterminal.com"><a href="/php-class/assignments.php">PHP CLASS</a></div>
+        <ul id="nav-ul">
+        <?php
+        $menu = array("Exercises" => "assignments.php", "Photo" => "pics.php");
+        foreach(array_keys($menu) as $key){
+          echo '<li class="nav-li"><a ';
+          $path_parts = pathinfo("$_SERVER[REQUEST_URI]");
+          if ( ''.$path_parts['basename'] == $menu[$key] )
+           echo "class='on' ";
+          echo 'href="'.$menu[$key].'" id="'.$menu[$key].'_tab">'.$key.'</a></li>';
+        }
+        ?>
+        </ul>
+        </nav>

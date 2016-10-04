@@ -1,28 +1,28 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
 
-    <article>
-        <dl>
-          <dt>Assignments</dt>
-          <dd><a href="murach_files/ex_starts/ch02_ex1">Exercise 2-1 (Completed)</a></dd>
-          <dd>Exercise 3-1 (Completed)</dd>
-          <dd><a href="erd/music_db_adam_quinton.png">Exercise 16-1</a></dd>
-          <dd>Exercise 4-1 (Not Completed)</dd>
-          <dd>Exercise 5-1 (Not Completed)</dd>
-          <dd>Exercise 7-2 (Not Completed)</dd>
-          <dd>Exercise 8-2 (Not Completed)</dd>
-          <dd>Exercise 15-1 (Not Completed)</dd>
-          <dd>Exercise 12-2 (Not Completed)</dd>
-          <dd>Exercise 13-1 (Not Completed)</dd>
-        </dl>
-        <dl>
-          <dt>Enhancements</dt>
-          <dd><a href="/php-class/enhancements/ch02_ex1">Enhancement 2-1 (Completed)</a></dd>
-          <dd>Enhancement 4-1 (Not Completed)</dd>
-          <dd>Enhancement 5-1 (Not Completed)</dd>
-          <dd>Enhancement 7-2 (Not Completed)</dd>
-          <dd>Enhancement 12-2 (Not Completed)</dd>
-          <dd>Enhancement 13-1 (Not Completed)</dd>
-        </dl>
-      </article>
+<article>
+  <dl>
+    <dt>Assignments</dt>
+    <dd><a href="murach_files/ex_starts/ch02_ex1">Exercise 2-1 (Completed)</a></dd>
+    <dd>Exercise 3-1 (Completed)</dd>
+    <dd><a href="erd/music_db_adam_quinton.png">Exercise 16-1</a></dd>
+    <dd><a href="murach_files/ex_starts/ch04_ex1/category_list.php">Exercise 4-1 (Completed)</a></dd>
+    <dd>Exercise 5-1 (Not Completed)</dd>
+    <dd>Exercise 7-2 (Not Completed)</dd>
+    <dd>Exercise 8-2 (Not Completed)</dd>
+    <dd>Exercise 15-1 (Not Completed)</dd>
+    <dd>Exercise 12-2 (Not Completed)</dd>
+    <dd>Exercise 13-1 (Not Completed)</dd>
+  </dl>
+  <dl>
+    <dt>Enhancements</dt>
+    <dd><a href="/php-class/enhancements/ch02_ex1">Enhancement 2-1 (Completed)</a></dd>
+    <dd>Enhancement 4-1 (Not Completed)</dd>
+    <dd>Enhancement 5-1 (Not Completed)</dd>
+    <dd>Enhancement 7-2 (Not Completed)</dd>
+    <dd>Enhancement 12-2 (Not Completed)</dd>
+    <dd>Enhancement 13-1 (Not Completed)</dd>
+  </dl>
+</article>
 
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/foot.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/foot.php'; ?>
