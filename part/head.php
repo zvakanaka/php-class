@@ -30,4 +30,3 @@
         ?>
         </ul>
         </nav>
-<?php echo "URL NAME: $urlName of $_SERVER[REQUEST_URI]"; ?>

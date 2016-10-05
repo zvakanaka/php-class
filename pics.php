@@ -1,14 +1,17 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
-<article>
+<ul class="sub-nav-ul">
 <?php
 if ($handle = opendir('../photo')) {
     $blacklist = array('.', '..', 'somedir', 'somefile.php');
     ?>
-    <ul>
     <?php
     while (false !== ($file = readdir($handle))) {
         if (!in_array($file, $blacklist)) {
-            echo "<li><a href=\"pics.php?album=$file\">$file</a></li>";
+          if ( $file == $_GET['album'] )
+            $class="on";
+          else
+            $class = "false";
+          echo "<li><a class=\"$class\" href=\"pics.php?album=$file\">$file</a></li>";
         }
     }
     closedir($handle);
@@ -16,6 +19,7 @@ if ($handle = opendir('../photo')) {
 ?>
 </ul>
 
+<article>
 <?php
   $album = $_GET['album'];
   $dirname = "../photo";
@@ -26,7 +30,7 @@ if ($handle = opendir('../photo')) {
     }
   } else {
     echo "<form method=".
-    '"post" action="create_thumbs.php"><p><input type="submit" value="'.
+    '"post" action="create_thumbs.php"><p><input name="album" type="submit" value="'.
     $_GET['album'].'">Create Thumbs</input></p>';
   }
 
