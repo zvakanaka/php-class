@@ -3,14 +3,19 @@
 <?php
 if ($handle = opendir('../photo')) {
     $blacklist = array('.', '..', 'somedir', 'somefile.php');
+    ?>
+    <ul>
+    <?php
     while (false !== ($file = readdir($handle))) {
         if (!in_array($file, $blacklist)) {
-            echo "<a href=\"pics.php?album=$file\">$file</a>";
+            echo "<li><a href=\"pics.php?album=$file\">$file</a></li>";
         }
     }
     closedir($handle);
 }
 ?>
+</ul>
+
 <?php
   $album = $_GET['album'];
   $dirname = "../photo";
@@ -20,7 +25,9 @@ if ($handle = opendir('../photo')) {
       echo '<a class="thumb-link" href="'.$dirname."/$album".substr($image, strrpos($image, "/")).'"><img class="thumb" src="'.$image.'" /></a>';
     }
   } else {
-
+    echo "<form method=".
+    '"post" action="create_thumbs.php"><p><input type="submit" value="'.
+    $_GET['album'].'">Create Thumbs</input></p>';
   }
 
   echo '<div class="bottom-spacer"></div>';
