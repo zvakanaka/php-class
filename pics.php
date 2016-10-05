@@ -2,7 +2,7 @@
 <ul class="sub-nav-ul">
 <?php
 if ($handle = opendir('../photo')) {
-    $blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'masters', 'index.php');
+    $blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
     ?>
     <?php
     while (false !== ($file = readdir($handle))) {
