@@ -33,6 +33,7 @@ body {
 }
 .sub-nav-ul li {
   display: inline;
+  word-wrap: break-word;
 }
 .sub-nav-ul li a {
     padding: 8px 15px 6px 14px;
