@@ -23,7 +23,7 @@ if ($handle = opendir('../photo')) {
 <?php
   $album = $_GET['album'];
   $dirname = "../photo";
-  $images = glob($dirname."/$album"."/.thumb/*.JPG");
+  $images = glob($dirname."/$album"."/.thumb/*.???*");
   if (count($images) ) {
     foreach($images as $image) {
       echo '<a class="thumb-link" href="'.$dirname."/$album".substr($image, strrpos($image, "/")).'"><img class="thumb" src="'.$image.'" /></a>';
