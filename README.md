@@ -1,4 +1,4 @@
-# [php-class](howtoterminal.com/php-class)
+# [php-class](http://howtoterminal.com/php-class)
 Sync to a web server via its crontab:
 ```sh
 crontab -e
