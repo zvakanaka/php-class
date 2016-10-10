@@ -128,6 +128,10 @@ code {
   font-family: ubuntu, monospace;
   color: white;
 }
+.toes-links li {
+  display: inline;
+  word-wrap: break-word;
+}
 
 .nav-li {
   display: inline;

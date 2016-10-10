@@ -7,7 +7,7 @@
     <dd>Exercise 3-1 (Completed)</dd>
     <dd><a href="erd/music_db_adam_quinton.png">Exercise 16-1</a></dd>
     <dd><a href="murach_files/ex_starts/ch04_ex1/category_list.php">Exercise 4-1 (Completed)</a></dd>
-    <dd>Exercise 5-1 (Not Completed)</dd>
+    <dd><a href="enhancements/ch05_ex1">Exercise 5-1 (Not Completed)</a></dd>
     <dd>Exercise 7-2 (Not Completed)</dd>
     <dd>Exercise 8-2 (Not Completed)</dd>
     <dd>Exercise 15-1 (Not Completed)</dd>

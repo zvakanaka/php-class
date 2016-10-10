@@ -42,8 +42,6 @@ if ($handle = opendir('../photo')) {
   $thumbs = glob($dirname."/$album"."/.thumb/*.???*");
   if (count($thumbs) ) {
     foreach($thumbs as $image) {
-      // echo '<a class="thumb-link" href="'.$dirname."/$album/.web".substr($image, strrpos($image, "/"))
-      //   .'"><img class="thumb" src="'.$image.'" /></a>';
         echo '<a class="thumb-link" href="javascript:void(0)" onclick="getAndShow(\''
                 .$dirname."/$album/.web".substr($image, strrpos($image, "/"))
                 .'\')"><img class="thumb" src="'.$image.'" /></a>';

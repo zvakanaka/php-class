@@ -3,6 +3,7 @@
   <link rel="stylesheet" type="text/css" href="/php-class/styles/lightbox.css"/>
 </noscript>
 <script>
+  //this is what google pageload recommends so I copied this:
   var loadDeferredStyles = function() {
     var addStylesNode = document.getElementById("deferred-styles");
     var replacement = document.createElement("div");
