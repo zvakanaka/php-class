@@ -1,4 +1,4 @@
-echo $(date) Creating webs >> log.txt
+echo $(date) Creating webs from $2 >> log.txt
 if [ -z $1 ]; then
   echo "ERROR: Must supply dirname"
   exit 1;

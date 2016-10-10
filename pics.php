@@ -1,38 +1,4 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
-<style>
-.lightbox_bg{
-  display: none;
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  z-index:1001;
-  -moz-opacity: 0.8;
-  opacity:.80;
-  filter: alpha(opacity=80);
-}
-.lightbox_fg {
-  display: none;
-  position: fixed;
-  top: 2%;
-  left: 1%;
-  width: 95%;
-  height: 95%;
-  padding: 0px;
-  z-index:1002;
-  overflow: hidden;
-}
-#lightbox-picture {
-  height: 100%;
-}
-#lightbox-sidebar {
-  float: right;
-  color: white;
-  z-index:1003;
-}
-</style>
 <ul class="sub-nav-ul">
 <?php
 if ($handle = opendir('../photo')) {
@@ -91,5 +57,5 @@ if ($handle = opendir('../photo')) {
   echo '<div class="bottom-spacer"></div>';
 ?>
 </article>
-<script src="lightbox.js"></script>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/lightbox.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/foot.php'; ?>

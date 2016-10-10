@@ -1,4 +1,4 @@
-echo $(date) Oh yeah >> log.txt
+echo $(date) Creating thumbs from $2 >> log.txt
 if [ -z $1 ]; then
   echo "ERROR: Must supply dirname"
   exit 1;
