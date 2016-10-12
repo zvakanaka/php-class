@@ -1,4 +1,3 @@
-echo $(date) Creating thumbs from $2 >> log.txt
 if [ -z $1 ]; then
   echo "ERROR: Must supply dirname"
   exit 1;
@@ -7,6 +6,7 @@ if [ -d ../photo/$1/.thumb ]; then
   echo "ERROR: $1 thumbs already exist"
   exit 1;
 fi
+echo $(date) Creating thumbs for $1 from $2 >> log.txt
 
 cd ../photo/$1 && mkdir .thumb;
 for f in *.[jJ]*; do

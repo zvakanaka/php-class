@@ -1,8 +1,8 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
 <ul class="sub-nav-ul">
 <?php
+$blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
 if ($handle = opendir('../photo')) {
-    $blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
     ?>
     <?php
     while (false !== ($file = readdir($handle))) {
@@ -19,32 +19,49 @@ if ($handle = opendir('../photo')) {
 ?>
 </ul>
 <br><br>
-		<div id="light" class="lightbox_fg">
-      <img id="lightbox-picture"/>
-      </div>
-		<div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
-
-    <div id="lightbox-sidebar">
-      <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a></div>
-    </div>
-
+<!-- lightbox -->
+<div id="light" class="lightbox_fg">
+  <img id="lightbox-picture"/>
+</div>
+<div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+  <div id="lightbox-sidebar">
+    <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+    <br/><a id="fullsize-link">Full-size</a>
+    <br/><a id="set-as-album-thumb">Set as Album Thumb</a>
+  </div>
+</div>
+<!-- end lightbox -->
 <article>
 <?php
   $album = $_GET['album'];
   $dirname = "../photo";
   //web-sized images
   $webs = glob($dirname."/$album"."/.web/*.???*");
-  if (!count($webs))
+  if (!isset($_GET['album'])) {
+    if ($handle = opendir('../photo')) {
+        while (false !== ($curAlbum = readdir($handle))) {
+            if (!in_array($curAlbum, $blacklist)) {
+              echo '<a class="thumb-link" href="?album='.$curAlbum.'"><img class="thumb" src="'.$dirname.'/'.$curAlbum.'/.album/thumb.jpg" /></a>';
+            }
+        }
+        closedir($handle);
+    }
+  } else if (!count($webs))
     echo "<form method="
     .'"post" action="create_webs.php"><p><input name="album" type="submit" value="'
     .$_GET['album'].'">Create Webs</input></p>';
 
   $thumbs = glob($dirname."/$album"."/.thumb/*.???*");
-  if (count($thumbs) ) {
+  if (!isset($_GET['album'])) {
+
+  } else if (count($thumbs) ) {
     foreach($thumbs as $image) {
-        echo '<a class="thumb-link" href="javascript:void(0)" onclick="getAndShow(\''
-                .$dirname."/$album/.web".substr($image, strrpos($image, "/"))
-                .'\')"><img class="thumb" src="'.$image.'" /></a>';
+      $webUrl = $dirname."/$album/.web".substr($image, strrpos($image, "/"));
+      $thumbUrl = $dirname."/$album/.thumb".substr($image, strrpos($image, "/"));
+      $fullsizeUrl = $dirname."/$album".substr($image, strrpos($image, "/"));
+      echo '<a class="thumb-link" href="javascript:void(0)" onclick="getAndShow(\''
+            .$webUrl.'\',\''.$thumbUrl.'\',\''.$fullsizeUrl.'\',\''.$_GET['album']
+            .'\')"><img class="thumb" src="'.$image.'" /></a>';
     }
   } else {
     echo "<form method=".
