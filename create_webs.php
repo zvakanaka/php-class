@@ -8,3 +8,5 @@
     echo "Error";
   }
 ?>
+<br/>
+<a href="pics.php">Back</a>
