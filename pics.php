@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
-<ul class="sub-nav-ul">
+<ul class="sub-nav-ul" id="bangs">
 <?php
 $blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
 if ($handle = opendir('../photo')) {
@@ -11,7 +11,7 @@ if ($handle = opendir('../photo')) {
             $class="on";
           else
             $class = "false";
-          echo "<li><a class=\"$class\" href=\"pics.php?album=$file\">$file</a></li>";
+          echo "<li><a class=\"$class\" id=\"$file\" href=\"pics.php?album=$file\">$file</a></li>";
         }
     }
     closedir($handle);
@@ -38,10 +38,19 @@ if ($handle = opendir('../photo')) {
   //web-sized images
   $webs = glob($dirname."/$album"."/.web/*.???*");
   if (!isset($_GET['album'])) {
+    //if root of photo dir, show album thumbs
+    ?>
+    <script type="text/javascript">
+      document.getElementById("bangs").style = "position:fixed;";
+    </script>
+    <?php
     if ($handle = opendir('../photo')) {
         while (false !== ($curAlbum = readdir($handle))) {
             if (!in_array($curAlbum, $blacklist)) {
-              echo '<a class="thumb-link" href="?album='.$curAlbum.'"><img class="thumb" src="'.$dirname.'/'.$curAlbum.'/.album/thumb.jpg" /></a>';
+              //highlight the tab while hovering a thumb
+              echo '<a class="thumb-link" href="?album='.$curAlbum.'"><img class="thumb" src="'.$dirname.'/'.$curAlbum.'/.album/thumb.jpg"'
+              .' onmouseover="document.getElementById(\''.$curAlbum.'\').className=\'on\';"'
+              .' onmouseout="document.getElementById(\''.$curAlbum.'\').className=\'\';" /></a>';
             }
         }
         closedir($handle);
