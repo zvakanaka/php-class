@@ -30,3 +30,7 @@
   color: white;
   z-index:1003;
 }
+
+#lightbox-sidebar a {
+  color: white;
+}

@@ -22,13 +22,13 @@ if ($handle = opendir('../photo')) {
 <!-- lightbox -->
 <div id="light" class="lightbox_fg">
   <img id="lightbox-picture"/>
-</div>
-<div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
   <div id="lightbox-sidebar">
     <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
     <br/><a id="fullsize-link">Full-size</a>
     <br/><a id="set-as-album-thumb">Set as Album Thumb</a>
   </div>
+</div>
+<div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
 </div>
 <!-- end lightbox -->
 <article>
