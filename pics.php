@@ -1,7 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
 <ul class="sub-nav-ul" id="bangs">
 <?php
-$blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
+$blacklist = array('.', '..', 'dist', 'kimbirthday', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
 if ($handle = opendir('../photo')) {
     ?>
     <?php
