@@ -23,9 +23,7 @@
 <div class="toes">
   <ul class="toes-links">
     <li><a href="/php-class/superglobals.php">Teaching Presentation</a></li>
-    <?php
-      $gitHub = substr($_SERVER[PHP_SELF], strrpos($_SERVER[PHP_SELF], "/"));
-    ?>
+    <?php $gitHub = substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], "/")); ?>
     <li><a href="https://github.com/zvakanaka/php-class/blob/master<?php echo $gitHub;?>">Code on GitHub</a></li>
   </ul>
 </div>

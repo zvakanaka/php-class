@@ -24,11 +24,12 @@
 }
 #lightbox-picture {
   height: 100%;
+  z-index: 1003;
 }
 #lightbox-sidebar {
   float: right;
   color: white;
-  z-index:1003;
+  z-index:1004;
 }
 
 #lightbox-sidebar a {
