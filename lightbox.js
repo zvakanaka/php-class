@@ -17,5 +17,5 @@ rotateLightbox.addEventListener('click', function rotateImg() {
   var curAngle = rotateMe.className;
   step += 1;
   var offset = rotateMe.width - rotateMe.height;
-  rotateMe.style.transform = 'translateY('+ offset/2*(step%2) +'px) '+'rotate('+ step*90 +'deg)'; // could be extended to work also in older browsers
+  rotateMe.style.transform = 'translateY('+ offset/2*(step%2) +'px) '+'rotate('+ step*90 +'deg)'; 
 });
