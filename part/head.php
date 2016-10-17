@@ -25,7 +25,8 @@
           echo '<li class="nav-li"><a ';
           if ( ''.$urlName == $menu[$key] )
            echo "class='on' ";
-          echo 'href="'.$menu[$key].".php".'" id="'.$menu[$key].'_tab">'.$key.'</a></li>';
+           $root = '/php-class';
+           echo 'href="'.$root."/".$menu[$key].".php".'" id="'.$menu[$key].'_tab">'.$key.'</a></li>';
         }
         ?>
         </ul>

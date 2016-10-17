@@ -1,7 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
 <ul class="sub-nav-ul" id="bangs">
 <?php
-$blacklist = array('.', '..', 'dist', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
+$blacklist = array('.', '..', 'dist', 'kimbirthday', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
 if ($handle = opendir('../photo')) {
     ?>
     <?php
@@ -24,7 +24,8 @@ if ($handle = opendir('../photo')) {
   <img id="lightbox-picture"/>
   <div id="lightbox-sidebar">
     <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
-    <br/><a id="fullsize-link">Full-size</a>
+    <br/><a id="download-link">Download</a>
+    <br/><a href='javascript:void(0)' id="rotate-lightbox-img">Rotate</a>
     <br/><a id="set-as-album-thumb">Set as Album Thumb</a>
   </div>
 </div>

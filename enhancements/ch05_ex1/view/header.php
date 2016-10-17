@@ -4,7 +4,7 @@
 <head>
     <title>My Guitar Shop</title>
     <link rel="stylesheet" type="text/css"
-          href="/ex_starts/ch05_ex1/main.css">
+          href="../../../murach_files/ex_starts/ch05_ex1/main.css">
 </head>
 
 <!-- the body section -->
