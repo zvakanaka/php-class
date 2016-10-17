@@ -25,6 +25,7 @@ if ($handle = opendir('../photo')) {
   <div id="lightbox-sidebar">
     <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
     <br/><a id="download-link">Download</a>
+    <br/><a href='javascript:void(0)' id="rotate-lightbox-img">Rotate</a>
     <br/><a id="set-as-album-thumb">Set as Album Thumb</a>
   </div>
 </div>
