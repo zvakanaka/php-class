@@ -18,7 +18,7 @@
     <dt>Enhancements</dt>
     <dd><a href="/php-class/enhancements/ch02_ex1">Enhancement 2-1 (Completed)</a></dd>
     <dd>Enhancement 4-1 (Not Completed)</dd>
-    <dd><a href="enhancements/ch05_enhance">Enhancement 5-1 (Not Completed)</a></dd>
+    <dd><a href="enhancements/ch05_enhance">Enhancement 5-1 (Completed)</a></dd>
     <dd>Enhancement 7-2 (Not Completed)</dd>
     <dd>Enhancement 12-2 (Not Completed)</dd>
     <dd>Enhancement 13-1 (Not Completed)</dd>

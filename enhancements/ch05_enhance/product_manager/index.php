@@ -46,7 +46,7 @@ if ($action == 'list_products') {
         delete_product($product_id);
         header("Location: .?category_id=$category_id");
     }
-} else if ($action == 'show_edit_form') {
+} else if ($action == 'edit_product') {
   $product_id = filter_input(INPUT_POST, 'product_id',
           FILTER_VALIDATE_INT);
   $category_id = filter_input(INPUT_POST, 'category_id',
@@ -59,6 +59,23 @@ if ($action == 'list_products') {
     $product = get_product($product_id);
     $categories = get_categories();
     include('product_edit.php');
+  }
+} else if ($action == 'update_product') {
+  $category_id = filter_input(INPUT_POST, 'category_id',
+          FILTER_VALIDATE_INT);
+  $product_id = filter_input(INPUT_POST, 'product_id',
+          FILTER_VALIDATE_INT);
+  $code = filter_input(INPUT_POST, 'code');
+  $name = filter_input(INPUT_POST, 'name');
+  $price = filter_input(INPUT_POST, 'price');
+  if ($product_id == NULL || $product_id == FALSE ||
+          $category_id == NULL || $category_id == FALSE || $code == NULL ||
+          $name == NULL || $price == NULL || $price == FALSE) {
+      $error = "Invalid product data. Check all fields and try again.";
+      include('../errors/error.php');
+  } else {
+    update_product($product_id, $category_id, $code, $name, $price);
+    header("Location: .?action=list_products");
   }
 } else if ($action == 'show_add_form') {
     $categories = get_categories();

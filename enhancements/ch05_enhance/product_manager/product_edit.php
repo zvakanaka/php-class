@@ -1,24 +1,20 @@
 <?php include '../view/header.php'; ?>
 <main>
     <h1>Edit Product</h1>
-    <form action="index.php" method="post" id="add_product_form">
-        <input type="hidden" name="action" value="add_product">
+    <form action="index.php" method="post" id="update_product_form">
+        <input type="hidden" name="action" value="update_product">
 
         <label>Category:</label>
         <select name="category_id">
         <?php
+            $product_id = $product['productID'];
             $code = $product['productCode'];
             $name = $product['productName'];
             $listPrice = $product['listPrice'];
+            $category_id = $product['categoryID'];
         ?>
         <?php foreach ( $categories as $category ) : ?>
-          <?php
-            $selected = "";
-            if ($category_id == $category['category_id']) {
-              $selected = "selected='selected'";
-            }
-          ?>
-            <option <?php echo $selected; ?>value="<?php echo $category['categoryID']; ?>">
+            <option <?php if ($category_id == $category['categoryID']) echo "selected='selected'"; ?>value="<?php echo $category['categoryID']; ?>">
                 <?php echo $category['categoryName']; ?>
             </option>
         <?php endforeach; ?>
@@ -37,8 +33,10 @@
         <input type="text" name="price" <?php echo "value='$listPrice'"; ?>/>
         <br>
 
+        <input type="hidden" name="product_id" <?php echo "value='$product_id'"; ?>/>
+
         <label>&nbsp;</label>
-        <input type="submit" value="Add Product" />
+        <input type="submit" value="Update Product" />
         <br>
     </form>
     <p class="last_paragraph">

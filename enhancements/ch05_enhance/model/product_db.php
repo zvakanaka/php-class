@@ -48,4 +48,22 @@ function add_product($category_id, $code, $name, $price) {
     $statement->execute();
     $statement->closeCursor();
 }
+
+function update_product($product_id, $category_id, $code, $name, $price) {
+    global $db;
+    $query = 'UPDATE products SET
+                 productCode = :code
+                 ,productName = :name
+                 ,listPrice = :price
+                 ,categoryID = :categoryID
+              WHERE productID = :productID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':categoryID', $category_id);
+    $statement->bindValue(':productID', $product_id);
+    $statement->bindValue(':code', $code);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':price', $price);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>
