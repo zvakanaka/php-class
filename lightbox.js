@@ -1,14 +1,15 @@
+var img = '';
 function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
-  var downloadUrl = thumbUrl.substr(thumbUrl.lastIndexOf("/")+1);
+  img = thumbUrl.substr(thumbUrl.lastIndexOf("/")+1);
   document.getElementById('lightbox-picture').setAttribute('src', webUrl);
 
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
-  document.getElementById('download-link').setAttribute('download', downloadUrl);
+  document.getElementById('download-link').setAttribute('download', img);
 
-  document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${downloadUrl}').previousSibling.click();`);
-  document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${downloadUrl}').nextSibling.click();`);
+  document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').previousSibling.click();`);
+  document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').nextSibling.click();`);
 
-  document.getElementById('set-as-album-thumb').setAttribute('href', `set_album_thumb.php?album=${album}&thumb=${downloadUrl}`);
+  document.getElementById('set-as-album-thumb').setAttribute('href', `set_album_thumb.php?album=${album}&thumb=${img}`);
   document.getElementById('light').style.display = 'block';
   document.getElementById('fade').style.display = 'block';
 }
@@ -24,3 +25,27 @@ rotateLightbox.addEventListener('click', function rotateImg() {
   var offset = rotateMe.width - rotateMe.height;
   rotateMe.style.transform = 'translateY('+ offset/2*(step%2) +'px) '+'rotate('+ step*90 +'deg)';
 });
+
+document.onkeydown = function(e) {
+    e = e || window.event;
+    switch(e.which || e.keyCode) {
+        case 37: // left
+        document.getElementById(`thumb-${img}`).previousSibling.click();
+        e.preventDefault();
+        break;
+
+        case 82:
+        rotateLightbox.click();
+        break;
+
+        case 39: // right
+        document.getElementById(`thumb-${img}`).nextSibling.click();
+        e.preventDefault();
+        break;
+
+        case 40: // down
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+};
