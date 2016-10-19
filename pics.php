@@ -27,6 +27,9 @@ if ($handle = opendir('../photo')) {
     <br/><a id="download-link">Download</a>
     <br/><a href='javascript:void(0)' id="rotate-lightbox-img">Rotate</a>
     <br/><a id="set-as-album-thumb">Set as Album Thumb</a>
+    <br/><a href='javascript:void(0)' id="prev-picture">Previous</a>
+    <br/><a href='javascript:void(0)' id="next-picture">Next</a>
+
   </div>
 </div>
 <div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
@@ -69,7 +72,8 @@ if ($handle = opendir('../photo')) {
       $webUrl = $dirname."/$album/.web".substr($image, strrpos($image, "/"));
       $thumbUrl = $dirname."/$album/.thumb".substr($image, strrpos($image, "/"));
       $fullsizeUrl = $dirname."/$album".substr($image, strrpos($image, "/"));
-      echo '<a class="thumb-link" href="javascript:void(0)" onclick="getAndShow(\''
+      echo '<a class="thumb-link" id="thumb-'.substr($image, strrpos($image, "/")+1)
+            .'" href="javascript:void(0)" onclick="getAndShow(\''
             .$webUrl.'\',\''.$thumbUrl.'\',\''.$fullsizeUrl.'\',\''.$_GET['album']
             .'\')"><img class="thumb" src="'.$image.'" /></a>';
     }
