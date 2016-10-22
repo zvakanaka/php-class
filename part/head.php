@@ -11,6 +11,7 @@
     <meta name="keywords" content="php, programming, byui">
     <meta name="author" content="Adam Quinton">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/manifest.json">
   </head>
   <body>
     <div id="page">

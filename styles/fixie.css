@@ -1,3 +1,11 @@
+.toes {
+  background: url("/php-class/img/background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body {
   font-family: "Helvetica", Helvetica, sans-serif;
 }
@@ -68,7 +76,8 @@ footer {
   width: 100%;
   height: 20px;
   background-color: #00a0ee;
-  -webkit-margin-before: 0px; margin-top: 0px;
+  -webkit-margin-before: 0px;
+  margin-top: 0px;
   padding: 5px 20px;
   color: white;
 }

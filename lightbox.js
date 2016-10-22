@@ -28,7 +28,6 @@ rotateLightbox.addEventListener('click', function rotateImg() {
 
 document.onkeydown = function(e) {
     e = e || window.event;
-    console.log(e.which);
     switch(e.which || e.keyCode) {
         case 37: // left
         document.getElementById(`thumb-${img}`).previousSibling.click();
@@ -48,6 +47,6 @@ document.onkeydown = function(e) {
         document.getElementById('close-lightbox').click();
         break;
 
-        default: return; // exit this handler for other keys
+        default: return;
     }
 };
