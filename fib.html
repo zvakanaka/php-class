@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fib</title>
+  </head>
+  <body>
+    <input type="text" name="name" onblur="fib(this.value)">
+    <p id="display"></p>
+
+    <script type="text/javascript">
+      function fib(num) {
+        var cur = 1;
+        var prev = 1;
+        var output = [0];
+        if (num >= 2) {
+          output.push(1);
+        }
+        if (num >= 3) {
+          output.push(1);
+        }
+        for (var i = 3; i < num; i++) {
+          next = prev + cur;
+          cur += next;
+          // if (i == 4) cur = 2;
+          console.log('prev', prev, 'cur', cur, 'i', i);
+          output.push(cur);
+          prev = next;
+        }
+        document.getElementById('display').innerHTML = output.join(', ');
+      }
+    </script>
+  </body>
+</html>
