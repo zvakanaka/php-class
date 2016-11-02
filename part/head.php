@@ -4,7 +4,7 @@
     <?php
       $urlName = $_SERVER['PHP_SELF'];
       $path_parts = pathinfo("$urlName");
-      $title = ucfirst($path_parts[filename]);
+      $title = ucfirst($path_parts['filename']);
      ?>
     <title> <?php echo $title; ?> | PHP Class</title>
     <meta name="description" content="PHP Class Assignments">
@@ -20,7 +20,8 @@
           <div id="logo" title="howtoterminal.com"><a href="/php-class/assignments.php">PHP CLASS</a></div>
         <ul id="nav-ul">
         <?php
-        $urlName = $path_parts[filename];
+
+        $urlName = $path_parts['filename'];
         $menu = array("Exercises" => "assignments", "Photo" => "pics");
         foreach(array_keys($menu) as $key){
           echo '<li class="nav-li"><a ';

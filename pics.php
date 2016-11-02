@@ -1,17 +1,18 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/part/head.php'; ?>
 <ul class="sub-nav-ul" id="bangs">
 <?php
-$blacklist = array('.', '..', 'dist', 'kimbirthday', 'section', 'rainy-summer-day', 'gif', 'masters', 'index.php');
+$blacklist = array('.', '..', 'dist', 'kimbirthday', 'section', 'rainy-summer-day', 'gif', 'masters');
 if ($handle = opendir('../photo')) {
     ?>
     <?php
-    while (false !== ($file = readdir($handle))) {
-        if (!in_array($file, $blacklist)) {
-          if ( $file == $_GET['album'] )
+    while (false !== ($curAlbum = readdir($handle))) {
+        if (!in_array($curAlbum, $blacklist)) {
+          if ( $curAlbum == $_GET['album'] )
             $class="on";
           else
             $class = "false";
-          echo "<li><a class=\"$class\" id=\"$file\" href=\"pics.php?album=$file\">$file</a></li>";
+          if (!strpos($curAlbum, '.'))
+            echo "<li><a class=\"$class\" id=\"$curAlbum\" href=\"pics.php?album=$curAlbum\">$curAlbum</a></li>";
         }
     }
     closedir($handle);
@@ -50,7 +51,7 @@ if ($handle = opendir('../photo')) {
     <?php
     if ($handle = opendir('../photo')) {
         while (false !== ($curAlbum = readdir($handle))) {
-            if (!in_array($curAlbum, $blacklist)) {
+            if (!in_array($curAlbum, $blacklist) && !strpos($curAlbum, '.')) {
               //highlight the tab while hovering a thumb
               echo '<a class="thumb-link" href="?album='.$curAlbum.'"><img class="thumb" src="'.$dirname.'/'.$curAlbum.'/.album/thumb.jpg"'
               .' onmouseover="document.getElementById(\''.$curAlbum.'\').className=\'on\';"'
