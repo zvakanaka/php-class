@@ -1,6 +1,7 @@
 <?php
 require('model/database.php');
 require('model/photo_db.php');
+require('model/photo_fs.php');
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -18,6 +19,14 @@ function display_users() {
 if ($action == 'register') {
   include('views/login-register.php');
 } else if ($action == 'home') {
+  $album_blacklist = array();
+  $hidden_albums = get_hidden_albums();
+  foreach ($hidden_albums as $album) {
+    $album_blacklist[] = $album['album_name'];
+  }
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, $album_blacklist);
+  include('views/home.php');
 } else if ($action == 'users') {
   display_users();
 } else if ($action == 'insert_user') {
@@ -42,8 +51,18 @@ if ($action == 'register') {
   delete_user($user_id);
   display_users();
 } else if ($action == 'album') {
-  //location get album
-  header("Location: .?album=");
+  $album = filter_input(INPUT_GET, 'album');
+  if ($album == NULL) {
+    $error = "No album. Try again.";
+  }
+  $image_blacklist = array();
+  $hidden_images = get_hidden_images();
+  foreach ($hidden_images as $image) {
+    $image_blacklist[] = $image['image_name'];
+  }
+  $photo_dir = "../../photo";
+  $images = get_images($photo_dir, $album, $image_blacklist);
+  include('views/album.php')
 }
 
 ?>

@@ -1,6 +1,6 @@
-<script src="lightbox.js"></script>
+<script src="../js/lightbox.js"></script>
 <noscript id="deferred-styles">
-  <link rel="stylesheet" type="text/css" href="/php-class/styles/lightbox.css"/>
+  <link rel="stylesheet" type="text/css" href="/php-class/dynamic/styles/lightbox.css"/>
 </noscript>
 <script>
   //this is what google pageload recommends so I copied this:
