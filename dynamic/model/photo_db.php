@@ -48,7 +48,7 @@ function album_exists($album_name) {
 function get_hidden_images() {
   global $db;
   $query = 'SELECT * FROM hidden_images
-            WHERE is_hidden = TRUE;
+            WHERE is_hidden = TRUE
             ORDER BY hidden_image_id';
   $statement = $db->prepare($query);
   $statement->execute();
@@ -107,17 +107,23 @@ function is_admin($user_id) {
     return false;
 }
 
-function add_user($username, $password, $email, $is_admin) {
+function get_users() {
+  global $db;
+  $query = 'SELECT * FROM users';
+  $statement = $db->prepare($query);
+  $statement->execute();
+  return $statement;
+}
+
+function insert_user($username, $password, $email) {
     global $db;
-    $query = 'INSERT INTO users
-                 (username, password, email, is_admin)
-              VALUES
-                 (:username, :password, :email, :is_admin)';
+    error_log("$username $password $email");
+    $query = 'INSERT INTO users VALUES
+              (NULL, :username, :password, :email, 1)';
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
-    $statement->bindValue(':password', $code);
+    $statement->bindValue(':password', $password);
     $statement->bindValue(':email', $email);
-    $statement->bindValue(':is_admin', $is_admin);
     $statement->execute();
     $statement->closeCursor();
 }
