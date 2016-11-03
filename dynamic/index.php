@@ -10,12 +10,16 @@ if ($action == NULL) {
   }
 }
 
+function display_users() {
+  $users = get_users();
+  include('views/users.php');
+}
+
 if ($action == 'register') {
   include('views/login-register.php');
 } else if ($action == 'home') {
 } else if ($action == 'users') {
-  $users = get_users();
-  include('views/users.php');
+  display_users();
 } else if ($action == 'insert_user') {
   $email = filter_input(INPUT_POST, 'email');
   $username = filter_input(INPUT_POST, 'username');
@@ -29,6 +33,14 @@ if ($action == 'register') {
     insert_user($username, $password, $email);
     header("Location: .?action=users");
   }
+} else if ($action == 'delete_user') {
+  $user_id = filter_input(INPUT_POST, 'user_id',
+        FILTER_VALIDATE_INT);
+  if ($user_id == NULL || $user_id == FALSE) {
+      $error = "Missing user id.";
+  }
+  delete_user($user_id);
+  display_users();
 } else if ($action == 'album') {
   //location get album
   header("Location: .?album=");

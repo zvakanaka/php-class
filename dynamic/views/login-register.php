@@ -1,3 +1,4 @@
+<?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 <main>
     <?php if (isset($error)) { ?>
       <p class="error">
@@ -27,3 +28,4 @@
     </form>
 
 </main>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>

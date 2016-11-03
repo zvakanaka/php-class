@@ -119,7 +119,7 @@ function insert_user($username, $password, $email) {
     global $db;
     error_log("$username $password $email");
     $query = 'INSERT INTO users VALUES
-              (NULL, :username, :password, :email, 1)';
+              (NULL, :username, :password, :email, 0)';
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':password', $password);
