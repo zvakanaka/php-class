@@ -5,8 +5,9 @@ require('model/photo_db.php');
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
   $action = filter_input(INPUT_GET, 'action');
-  if ($action == NULL)
+  if ($action == NULL) {
     $action = 'register';
+  }
 }
 
 if ($action == 'register') {
@@ -14,9 +15,6 @@ if ($action == 'register') {
 } else if ($action == 'home') {
 } else if ($action == 'users') {
   $users = get_users();
-  foreach ($users as $user) {
-    error_log(sizeof($user));
-  }
   include('views/users.php');
 } else if ($action == 'insert_user') {
   $email = filter_input(INPUT_POST, 'email');
