@@ -2,7 +2,7 @@
 function get_hidden_albums() {
     global $db;
     $query = 'SELECT * FROM hidden_albums
-              WHERE is_hidden = TRUE;
+              WHERE is_hidden = TRUE
               ORDER BY hidden_album_id';
     $statement = $db->prepare($query);
     $statement->execute();
@@ -13,7 +13,7 @@ function hide_album($album_name) {
   if (album_exists($album_name)) {
     $query = 'UPDATE hidden_albums SET
               is_hidden = TRUE
-              WHERE album_name = :album_name;';
+              WHERE album_name = :album_name';
     $statement = $db->prepare($query);
     $statement->bindValue(":album_name", $album_name);
     $statement->execute();
@@ -33,7 +33,7 @@ function hide_album($album_name) {
 function album_exists($album_name) {
   global $db;
   $query = 'SELECT * FROM hidden_albums
-            WHERE album_name = :album_name;';
+            WHERE album_name = :album_name';
   $statement = $db->prepare($query);
   $statement->bindValue(":album_name", $album_name);
   $statement->execute();
@@ -45,53 +45,110 @@ function album_exists($album_name) {
   return true;
 }
 
-function get_($category_id) {
-    global $db;
-    $query = 'SELECT * FROM products
-              WHERE products.categoryID = :category_id
-              ORDER BY productID';
-    $statement = $db->prepare($query);
-    $statement->bindValue(":category_id", $category_id);
-    $statement->execute();
-    $products = $statement->fetchAll();
-    $statement->closeCursor();
-    return $products;
+function get_hidden_images() {
+  global $db;
+  $query = 'SELECT * FROM hidden_images
+            WHERE is_hidden = TRUE;
+            ORDER BY hidden_image_id';
+  $statement = $db->prepare($query);
+  $statement->execute();
+  return $statement;
 }
 
-function get_product($product_id) {
-    global $db;
-    $query = 'SELECT * FROM products
-              WHERE productID = :product_id';
+function hide_image($image_name) {
+  if (image_exists($image_name)) {
+    $query = 'UPDATE hidden_images SET
+              is_hidden = TRUE
+              WHERE image_name = :image_name';
     $statement = $db->prepare($query);
-    $statement->bindValue(":product_id", $product_id);
-    $statement->execute();
-    $product = $statement->fetch();
-    $statement->closeCursor();
-    return $product;
-}
-
-function delete_product($product_id) {
-    global $db;
-    $query = 'DELETE FROM products
-              WHERE productID = :product_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':product_id', $product_id);
+    $statement->bindValue(":image_name", $image_name);
     $statement->execute();
     $statement->closeCursor();
+  } else {
+    $query = 'INSERT INTO hidden_images VALUES
+              ( NULL
+              , :image_name
+              , TRUE)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":image_name", $image_name);
+    $statement->execute();
+    $statement->closeCursor();
+  }
 }
 
-function add_product($category_id, $code, $name, $price) {
+function image_exists($image_name) {
+  global $db;
+  $query = 'SELECT * FROM hidden_images
+            WHERE image_name = :image_name';
+  $statement = $db->prepare($query);
+  $statement->bindValue(":image_name", $image_name);
+  $statement->execute();
+  $hidden_image = $statement->fetch();
+  $statement->closeCursor();
+  if (sizeof($hidden_image) !== 0) {
+    return false;
+  }
+  return true;
+}
+
+function is_admin($user_id) {
     global $db;
-    $query = 'INSERT INTO products
-                 (categoryID, productCode, productName, listPrice)
+    $query = 'SELECT * FROM users
+              WHERE user_id = :user_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $user = $statement->fetch();
+    $statement->closeCursor();
+    if ($user['is_admin']) {
+      error_log($user['is_admin']);
+      return true;
+    }
+    return false;
+}
+
+function add_user($username, $password, $email, $is_admin) {
+    global $db;
+    $query = 'INSERT INTO users
+                 (username, password, email, is_admin)
               VALUES
-                 (:category_id, :code, :name, :price)';
+                 (:username, :password, :email, :is_admin)';
     $statement = $db->prepare($query);
-    $statement->bindValue(':category_id', $category_id);
-    $statement->bindValue(':code', $code);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':price', $price);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':password', $code);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':is_admin', $is_admin);
     $statement->execute();
     $statement->closeCursor();
+}
+
+function delete_user($user_id) {
+    global $db;
+    $query = 'DELETE FROM users
+              WHERE user_id = :user_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function set_admin($user_id) {
+  $query = 'UPDATE users SET
+            is_hidden = TRUE
+            WHERE user_id = :user_id';
+  $statement = $db->prepare($query);
+  $statement->bindValue(":user_id", $user_id);
+  $statement->execute();
+  $statement->closeCursor();
+}
+
+function unset_admin($user_id) {
+  $query = 'UPDATE users SET
+            is_hidden = FALSE
+            WHERE user_id = :user_id';
+  $statement = $db->prepare($query);
+  $statement->bindValue(":user_id", $user_id);
+  $statement->execute();
+  $statement->closeCursor();
 }
 ?>
