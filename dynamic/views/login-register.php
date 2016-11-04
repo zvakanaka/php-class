@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
-<main>
+    <main>      
     <?php if (isset($error)) { ?>
       <p class="error">
         <?php echo $error; ?>
@@ -26,6 +26,6 @@
         <input type="submit" value="Register" />
         <br>
     </form>
+  </main>
 
-</main>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>
