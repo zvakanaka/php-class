@@ -62,7 +62,7 @@ if ($action == 'register') {
   }
   $photo_dir = "../../photo";
   $images = get_images($photo_dir, $album, $image_blacklist);
-  include('views/album.php')
+  include('views/album.php');
 }
 
 ?>

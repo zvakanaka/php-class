@@ -30,12 +30,12 @@ document.onkeydown = function(e) {
     e = e || window.event;
     switch(e.which || e.keyCode) {
         case 37: // left
-        document.getElementById(`thumb-${img}`).previousSibling.click();
+        document.getElementById(`thumb-${img}`).previousElementSibling.click();
         e.preventDefault();
         break;
 
         case 39: // right
-        document.getElementById(`thumb-${img}`).nextSibling.click();
+        document.getElementById(`thumb-${img}`).nextElementSibling.click();
         e.preventDefault();
         break;
 
