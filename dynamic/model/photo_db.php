@@ -2,7 +2,7 @@
 function get_hidden_albums() {
     global $db;
     $query = 'SELECT * FROM hidden_albums
-              WHERE is_hidden = TRUE
+              WHERE is_hidden = 1
               ORDER BY hidden_album_id';
     $statement = $db->prepare($query);
     $statement->execute();
@@ -10,9 +10,10 @@ function get_hidden_albums() {
 }
 
 function hide_album($album_name) {
+  global $db;
   if (album_exists($album_name)) {
     $query = 'UPDATE hidden_albums SET
-              is_hidden = TRUE
+              is_hidden = 1
               WHERE album_name = :album_name';
     $statement = $db->prepare($query);
     $statement->bindValue(":album_name", $album_name);
@@ -22,7 +23,7 @@ function hide_album($album_name) {
     $query = 'INSERT INTO hidden_albums VALUES
               ( NULL
               , :album_name
-              , TRUE)';
+              , 1)';
     $statement = $db->prepare($query);
     $statement->bindValue(":album_name", $album_name);
     $statement->execute();
@@ -48,7 +49,7 @@ function album_exists($album_name) {
 function get_hidden_images() {
   global $db;
   $query = 'SELECT * FROM hidden_images
-            WHERE is_hidden = TRUE
+            WHERE is_hidden = 1
             ORDER BY hidden_image_id';
   $statement = $db->prepare($query);
   $statement->execute();
@@ -58,7 +59,7 @@ function get_hidden_images() {
 function hide_image($image_name) {
   if (image_exists($image_name)) {
     $query = 'UPDATE hidden_images SET
-              is_hidden = TRUE
+              is_hidden = 1
               WHERE image_name = :image_name';
     $statement = $db->prepare($query);
     $statement->bindValue(":image_name", $image_name);
@@ -68,7 +69,7 @@ function hide_image($image_name) {
     $query = 'INSERT INTO hidden_images VALUES
               ( NULL
               , :image_name
-              , TRUE)';
+              , 1)';
     $statement = $db->prepare($query);
     $statement->bindValue(":image_name", $image_name);
     $statement->execute();

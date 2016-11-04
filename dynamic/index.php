@@ -27,8 +27,14 @@ if ($action == 'register') {
     $album_blacklist[] = $album['album_name'];
   }
   $photo_dir = "../../photo";
-  $albums = get_albums($photo_dir, $album_blacklist);
-  include('views/home.php');
+  $show_hidden = filter_input(INPUT_GET, 'hidden');
+  if ($show_hidden == 'true') {
+    $albums = get_albums($photo_dir, array());
+    include('views/home.php');
+  } else {
+    $albums = get_albums($photo_dir, $album_blacklist);
+    include('views/home.php');
+  }
 } else if ($action == 'users') {
   display_users();
 } else if ($action == 'insert_user') {
@@ -65,6 +71,14 @@ if ($action == 'register') {
   foreach ($hidden_images as $image) {
     $image_blacklist[] = $image['image_name'];
   }
+  $hidden_albums = get_hidden_albums();
+  $album_blacklist = array();
+  foreach ($hidden_albums as $hidden_album) {
+    $album_blacklist[] = $hidden_album['album_name'];
+  }
+  if (in_array($album, $album_blacklist)) {
+    $message = "This album is private";
+  }
   $photo_dir = "../../photo";
   $images = get_images($photo_dir, $album, $image_blacklist);
   include('views/album.php');
@@ -89,6 +103,10 @@ if ($action == 'register') {
   echo "Logged out, redirecting...";
 	header( "Refresh:3; url=.?action=home", true, 303);
 	die();
+} else if ($action == 'hide_album') {
+  $album_name = filter_input(INPUT_POST, 'album_name');
+  hide_album($album_name);
+  header("Location: .?action=album&album=$album_name");
 }
 
 ?>

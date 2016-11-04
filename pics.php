@@ -3,8 +3,6 @@
 <?php
 $blacklist = array('.', '..', 'dist', 'kimbirthday', 'section', 'rainy-summer-day', 'gif', 'masters');
 if ($handle = opendir('../photo')) {
-    ?>
-    <?php
     while (false !== ($curAlbum = readdir($handle))) {
         if (!in_array($curAlbum, $blacklist)) {
           if ( $curAlbum == $_GET['album'] )

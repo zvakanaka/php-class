@@ -50,8 +50,15 @@ footer a {
   text-decoration: none;
 }
 
-.error {
-  background-color: black;
-  color: red;
+.error, .message {
   padding: 10px;
+  background-color: black;
+}
+
+.error {
+  color: red;
+}
+
+.message {
+  color: lime;  
 }
