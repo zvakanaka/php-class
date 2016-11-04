@@ -1,7 +1,9 @@
 <?php
 require('model/database.php');
 require('model/photo_db.php');
+require('model/user_db.php');
 require('model/photo_fs.php');
+session_start();
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -33,14 +35,17 @@ if ($action == 'register') {
   $email = filter_input(INPUT_POST, 'email');
   $username = filter_input(INPUT_POST, 'username');
   $password = filter_input(INPUT_POST, 'password');
-
   if ($username == NULL || $username == FALSE || $password == NULL ||
           $password == FALSE || $email == NULL || $email == FALSE) {
       $error = "Invalid user data. Check all fields and try again.";
       include('views/login-register.php');
   } else {
-    insert_user($username, $password, $email);
-    header("Location: .?action=users");
+    if (insert_user($username, $password, $email)) {
+      header("Location: .?action=users");
+    } else {
+      $error = "Account already exists.";
+      include('views/login-register.php');
+    }
   }
 } else if ($action == 'delete_user') {
   $user_id = filter_input(INPUT_POST, 'user_id',
@@ -63,6 +68,27 @@ if ($action == 'register') {
   $photo_dir = "../../photo";
   $images = get_images($photo_dir, $album, $image_blacklist);
   include('views/album.php');
+} else if ($action == 'authenticate') {
+  $username = filter_input(INPUT_POST, 'username');
+  $password = filter_input(INPUT_POST, 'password');
+  if ($username == NULL || $username == FALSE || $password == NULL ||
+          $password == FALSE) {
+      $error = "Invalid user data. Check all fields and try again.";
+      include('views/login-register.php');
+  }
+
+  if (login($username, $password)) {
+    $_SESSION["logged_in"] = $username;
+    header("Location: .?action=home");
+  } else {
+    $error = "Password/username mismatch. Please try again, unless you are a hacker.";
+    include('views/login-register.php');
+  }
+} else if ($action == 'logout') {
+  unset($_SESSION["logged_in"]);
+  echo "Logged out, redirecting...";
+	header( "Refresh:3; url=.?action=home", true, 303);
+	die();
 }
 
 ?>

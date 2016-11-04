@@ -12,7 +12,12 @@
     <header role="navigation">
       <a class="logo" href="/php-class/assignments.php">PHP CLASS</a>
       <?php
-      $menu = array("Login" => "register", "Home" => "home");
+      $menu = array("Home" => "home");
+      if (isset($_SESSION["logged_in"])) {
+        $menu["Log Out"] = "logout";
+      } else {
+        $menu["Login"] = "register";
+      }
       foreach(array_keys($menu) as $key){
         echo '<a class="nav-a';
         if ( ''.$action == $menu[$key] )

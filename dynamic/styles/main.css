@@ -49,3 +49,9 @@ footer a {
 .thumb-link {
   text-decoration: none;
 }
+
+.error {
+  background-color: black;
+  color: red;
+  padding: 10px;
+}
