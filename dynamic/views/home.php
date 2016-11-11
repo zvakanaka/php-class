@@ -8,7 +8,7 @@
 <?php } ?>
 </main>
 
-<?php if ($_SESSION['is_admin']) {
+<?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
   if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
     <section>
       <a href="?action=home&hidden=true">Show Hidden Albums</a>

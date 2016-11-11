@@ -10,7 +10,7 @@
         </tr>
         <?php foreach ($users as $user) : ?>
             <tr>
-              <td><?php echo $user['username']; ?></td>
+              <td><a href="?action=review_favorites&user_id=<?php echo $user['user_id'];?>"><?php echo $user['username']; ?></a></td>
               <td><?php echo $user['email']; ?></td>
               <td><?php echo ($user['is_admin'] == 1) ? "✓" : "✗";?></td>
               <td><form action="." method="post">

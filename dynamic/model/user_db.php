@@ -48,6 +48,28 @@ function get_user_id($username) {
   return $user_id['user_id'];
 }
 
+function get_user_name($user_id) {
+  global $db;
+  $query = 'SELECT username FROM users
+            WHERE user_id = :user_id';
+  $statement = $db->prepare($query);
+  $statement->bindValue(":user_id", $user_id);
+  $statement->execute();
+  $user_id = $statement->fetch();
+  return $user_id['username'];
+}
+
+function get_user_email($user_id) {
+  global $db;
+  $query = 'SELECT email FROM users
+            WHERE user_id = :user_id';
+  $statement = $db->prepare($query);
+  $statement->bindValue(":user_id", $user_id);
+  $statement->execute();
+  $user_id = $statement->fetch();
+  return $user_id['email'];
+}
+
 function insert_user($username, $password, $email) {
     global $db;
   	$user_exists = false;
@@ -60,7 +82,7 @@ function insert_user($username, $password, $email) {
   		$user_exists = true;
   	}
   	if ($user_exists == true) {
-  		return !$user_exists;
+  		return false;
   	} else {
       $query = 'INSERT INTO users VALUES
                 (NULL, :username, :password, :email, 0)';
@@ -73,7 +95,7 @@ function insert_user($username, $password, $email) {
       $statement->bindValue(':email', $email);
   		$statement->execute();
       $statement->closeCursor();
-      return !user_exists;
+      return true;
   	}
 }
 
@@ -88,6 +110,7 @@ function delete_user($user_id) {
 }
 
 function set_admin($user_id) {
+  global $db;
   $query = 'UPDATE users SET
             is_hidden = TRUE
             WHERE user_id = :user_id';
@@ -98,6 +121,7 @@ function set_admin($user_id) {
 }
 
 function unset_admin($user_id) {
+  global $db;
   $query = 'UPDATE users SET
             is_hidden = FALSE
             WHERE user_id = :user_id';
@@ -105,5 +129,69 @@ function unset_admin($user_id) {
   $statement->bindValue(":user_id", $user_id);
   $statement->execute();
   $statement->closeCursor();
+}
+
+function get_favorites($user_id) {
+ global $db;
+ $query = 'SELECT * FROM faves
+           WHERE user_id = :user_id';
+ $stmnt = $db->prepare($query);
+ $stmnt->bindValue(':user_id', $user_id);
+ $stmnt->execute();
+ $faves = $stmnt->fetchAll();
+ $stmnt->closeCursor();
+ return $faves;
+}
+
+function get_album_favorites($user_id, $album_name) {
+ global $db;
+ $query = 'SELECT * FROM faves
+           WHERE album_name = :album_name
+           AND user_id = :user_id';
+ $stmnt = $db->prepare($query);
+ $stmnt->bindValue(':user_id', $user_id);
+ $stmnt->bindValue(':album_name', $album_name);
+ $stmnt->execute();
+ $faves = $stmnt->fetchAll();
+ $stmnt->closeCursor();
+ return $faves;
+}
+
+function insert_favorite($album_name, $photo_name, $user_id)  {
+ global $db;
+ $query = 'INSERT INTO faves VALUES (
+          NULL, :user_id, :photo_name, :album_name, 0, 0
+          )';
+ $stmnt = $db->prepare($query);
+ $stmnt->bindValue(':user_id', $user_id);
+ $stmnt->bindValue(':album_name', $album_name);
+ $stmnt->bindValue(':photo_name', $photo_name);
+ $stmnt->execute();
+ $stmnt->closeCursor();
+}
+
+function unfavorite($album_name, $photo_name, $user_id) {
+ global $db;
+ $query = 'DELETE FROM faves
+           WHERE user_id = :user_id
+           AND album_name = :album_name
+           AND photo_name = :photo_name';
+ $stmnt = $db->prepare($query);
+ $stmnt->bindValue(':user_id', $user_id);
+ $stmnt->bindValue(':album_name', $album_name);
+ $stmnt->bindValue(':photo_name', $photo_name);
+ $stmnt->execute();
+ $stmnt->closeCursor();
+}
+
+function set_reviewed($user_id) {
+ global $db;
+ $query = 'UPDATE faves SET
+           reviewed = 1
+           WHERE user_id = :user_id';
+ $stmnt = $db->prepare($query);
+ $stmnt->bindValue(':user_id', $user_id);
+ $stmnt->execute();
+ $stmnt->closeCursor();
 }
 ?>

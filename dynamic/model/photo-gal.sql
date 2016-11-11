@@ -17,7 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `photo_db` DEFAULT CHARACTER SET latin1 ;
 USE `photo_db` ;
 
-DROP TABLE IF EXISTS `photo_db`.`users`;
+-- DROP TABLE IF EXISTS `photo_db`.`users`;
 -- -----------------------------------------------------
 -- Table `photo_db`.`users`
 -- -----------------------------------------------------
@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `photo_db`.`faves` (
   `user_id` INT UNSIGNED NOT NULL,
   `photo_name` VARCHAR(45) NOT NULL,
   `album_name` VARCHAR(45) NOT NULL,
+  `reviewed` TINYINT(1) NULL DEFAULT 0,
   `request_hidden` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`faves_id`),
   INDEX `index2` (`user_id` ASC),

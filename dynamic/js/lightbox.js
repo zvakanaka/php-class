@@ -10,6 +10,8 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${img}`);
   document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${img}`);
 
+  document.getElementById('favorite').setAttribute('href', `?action=favorite&album_name=${album}&photo_name=${img}`);
+
   document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').previousElementSibling.click();`);
   document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').nextElementSibling.click();`);
 

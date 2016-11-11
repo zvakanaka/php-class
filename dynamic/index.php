@@ -50,9 +50,14 @@ if ($action == 'register') {
       $error = "Invalid user data. Check all fields and try again.";
       include('views/login-register.php');
   } else {
-    if (insert_user($username, $password, $email)) {
-      header("Location: .?action=users");
-    } else { //TODO: fix these logics
+    if (insert_user($username, $password, $email) == true) {
+      $_SESSION["logged_in"] = $username;
+      $user_id = get_user_id($username);
+      if (is_admin($user_id)) {
+        $_SESSION["is_admin"] = true;
+      }
+      header("Location: .?action=home");
+    } else {
       $error = "Account already exists.";
       include('views/login-register.php');
     }
@@ -82,7 +87,7 @@ if ($action == 'register') {
     $album_blacklist[] = $hidden_album['album_name'];
   }
   if (in_array($album, $album_blacklist)) {
-    $message = "This album is private";
+    $message = "This album is unlisted. Anyone with the link can see it.";
   }
   $photo_dir = "../../photo";
   $show_hidden = filter_input(INPUT_GET, 'hidden');
@@ -118,7 +123,6 @@ if ($action == 'register') {
   session_destroy();
   session_write_close();
   setcookie(session_name(),'',0,'/');
-  session_regenerate_id(true);
   echo "Logged out, redirecting in a second...";
 	header( "Refresh:1; url=.?action=home", true, 303);
 	die();
@@ -231,7 +235,11 @@ if ($action == 'register') {
   }
   $album_name = filter_input(INPUT_GET, 'album_name');
   $photo_name = filter_input(INPUT_GET, 'photo_name');
-
+  if ($album_name == NULL || $album_name == FALSE ||
+      $photo_name == NULL || $photo_name == FALSE) {
+    $album_name = filter_input(INPUT_POST, 'album_name');
+    $photo_name = filter_input(INPUT_POST, 'photo_name');
+  }
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
 
@@ -264,6 +272,54 @@ if ($action == 'register') {
     shell_async($cmd);
     echo $album_name."/".$photo_name." deleted.";
     header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
+  }
+} else if ($action == 'favorite') {
+  $album_name = filter_input(INPUT_GET, 'album_name');
+  $photo_name = filter_input(INPUT_GET, 'photo_name');
+
+  if ($album_name == NULL || $album_name == FALSE ||
+      $photo_name == NULL || $photo_name == FALSE) {
+      echo "Error: Could not favorite $album_name/$photo_name.";
+      header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
+  } else {
+    $user_id = get_user_id($_SESSION['logged_in']);
+    insert_favorite($album_name, $photo_name, $user_id);
+    echo $album_name."/".$photo_name." favorited.";
+    header("Refresh:1; url=.?action=album&album=$album_name", true, 303);
+  }
+} else if ($action == 'review_favorites') {
+  $user_id = filter_input(INPUT_GET, 'user_id');
+
+  if ($user_id == NULL || $user_id == FALSE) {
+    echo "Error: No user id provided";
+    header("Refresh:2; url=.?action=users", true, 303);
+  } else if (!isset($_SESSION['is_admin'])) {
+    echo "Imposter! You are not an admin.";
+    header("Refresh:2; url=.?action=home", true, 303);
+  } else {
+    $faves = get_favorites($user_id);
+    include('views/favorites.php');
+  }
+} else if ($action == 'zip_favorites') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
+  $user_id = filter_input(INPUT_GET, 'user_id');
+  if ($user_id == NULL || $user_id == FALSE) {
+      echo "Error: No user id supplied.";
+      header("Refresh:2; url=.?action=users", true, 303);
+  } else {
+    $faves = get_favorites($user_id);
+    // the zip will be updated
+    $cmd = "zip -j ../../zips/user_$user_id.zip ";
+    foreach ($faves as $fave) {
+      $cmd .= "../../photo/".$fave['album_name']."/".$fave['photo_name']." ";
+    }
+    $cmd .= "";
+    shell_async($cmd);
+    echo "Sit tight while user_$user_id.zip is created";
+    header("Refresh:1; url=.?action=review_favorites&user_id=$user_id&zip=user_$user_id.zip", true, 303);
   }
 }
 ?>
