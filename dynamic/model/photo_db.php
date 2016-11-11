@@ -57,6 +57,7 @@ function get_hidden_images() {
 }
 
 function hide_image($image_name) {
+  global $db;
   if (image_exists($image_name)) {
     $query = 'UPDATE hidden_images SET
               is_hidden = 1

@@ -24,7 +24,6 @@ function is_admin($user_id) {
     $user = $statement->fetch();
     $statement->closeCursor();
     if ($user['is_admin']) {
-      error_log($user['is_admin']);
       return true;
     }
     return false;

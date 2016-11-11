@@ -8,10 +8,23 @@
                             '<?php echo "$photo_dir/$album/.thumb/$image"; ?>',
                             '<?php echo "$photo_dir/$album/$image"; ?>',
                             '<?php echo $album; ?>')">
-      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/$image";?>"/>
+      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/$image";?>" onError="this.onerror=null;this.src='img/thumb-not-found.png';"/>
     </a>
 <?php } ?>
 
+</main>
+
+<?php if ($_SESSION['is_admin']) {
+  if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
+    <section>
+      <a href="?action=album&album=<?php echo $album;?>&hidden=true">Show Hidden Photos</a>
+    </section>
+<?php } else { ?>
+  <section>
+    <a href="?action=album&album=<?php echo $album;?>">Hide Hidden Photos</a>
+  </section>
+
+<?php } ?>
 <?php if (!isset($message) && isset($album)) { ?>
   <form class="" action="." method="post">
     <input type="hidden" name="action" value="hide_album" />
@@ -19,8 +32,7 @@
     <input type="submit" name="submit" value="Hide this album">
   </form>
 <?php } ?>
-
-</main>
+<?php } ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/lightbox.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>

@@ -66,3 +66,7 @@ footer a {
 .message {
   color: lime;
 }
+
+.hidden {
+  display: none;
+}

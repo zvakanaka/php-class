@@ -2,14 +2,17 @@ var img = '';
 function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   img = thumbUrl.substr(thumbUrl.lastIndexOf("/")+1);
   document.getElementById('lightbox-picture').setAttribute('src', webUrl);
-
+  document.getElementById('lightbox-picture').setAttribute('onError', "this.onerror=null;this.src='img/web-not-found.png';");
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
   document.getElementById('download-link').setAttribute('download', img);
+
+  document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${img}`);
+  document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${img}`);
+  document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${img}`);
 
   document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').previousElementSibling.click();`);
   document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').nextElementSibling.click();`);
 
-  document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${img}`);
   document.getElementById('light').style.display = 'block';
   document.getElementById('fade').style.display = 'block';
 }

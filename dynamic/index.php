@@ -69,6 +69,7 @@ if ($action == 'register') {
   $album = filter_input(INPUT_GET, 'album');
   if ($album == NULL) {
     $error = "No album. Try again.";
+    //TODO: redirect to home
   }
   $image_blacklist = array();
   $hidden_images = get_hidden_images();
@@ -84,8 +85,14 @@ if ($action == 'register') {
     $message = "This album is private";
   }
   $photo_dir = "../../photo";
-  $images = get_images($photo_dir, $album, $image_blacklist);
-  include('views/album.php');
+  $show_hidden = filter_input(INPUT_GET, 'hidden');
+  if ($show_hidden == 'true') {
+    $images = get_images($photo_dir, $album, array());
+    include('views/album.php');
+  } else {
+    $images = get_images($photo_dir, $album, $image_blacklist);
+    include('views/album.php');
+  }
 } else if ($action == 'authenticate') {
   $username = filter_input(INPUT_POST, 'username');
   $password = filter_input(INPUT_POST, 'password');
@@ -122,8 +129,16 @@ if ($action == 'register') {
 } else if ($action == 'dslr') {
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
   include('views/dslr.php');
 } else if ($action == 'download_from_dslr') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
   $new_album = filter_input(INPUT_POST, 'new_album');
   if ($new_album == NULL || $new_album == FALSE) {
     $error = "No album name specified. Check all fields and try again.";
@@ -208,6 +223,47 @@ if ($action == 'register') {
     shell_async($cmd);
     $message = "Album thumb ".$album_name."/".$photo_name." created.";
     include('views/dslr.php');
+  }
+} else if ($action == 'move_to_trash') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
+  $album_name = filter_input(INPUT_GET, 'album_name');
+  $photo_name = filter_input(INPUT_GET, 'photo_name');
+
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+
+  if ($album_name == NULL || $album_name == FALSE ||
+      $photo_name == NULL || $photo_name == FALSE) {
+      echo "Error: Could not hide $album_name/$photo_name.";
+      header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
+  } else {
+    hide_image($album_name."/".$photo_name);
+    echo $album_name."/".$photo_name." hidden.";
+    header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
+  }
+} else if ($action == 'delete_photo') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
+  $album_name = filter_input(INPUT_GET, 'album_name');
+  $photo_name = filter_input(INPUT_GET, 'photo_name');
+
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+
+  if ($album_name == NULL || $album_name == FALSE ||
+      $photo_name == NULL || $photo_name == FALSE) {
+    echo "Error: Could not delete $album_name/$photo_name.";
+    header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
+  } else {
+    $cmd = 'bash scripts/delete_photo.sh '.escapeshellarg($album_name).' '.escapeshellarg($photo_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
+    shell_async($cmd);
+    echo $album_name."/".$photo_name." deleted.";
+    header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
   }
 }
 ?>

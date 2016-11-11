@@ -7,6 +7,7 @@
     </a>
 <?php } ?>
 </main>
+
 <?php if ($_SESSION['is_admin']) {
   if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
     <section>
