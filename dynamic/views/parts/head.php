@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <?php $action = (isset($action)) ? $action : filter_input(INPUT_GET, 'action'); ?>
     <title> <?php echo ucfirst($action); ?> | PHP Class</title>
     <meta name="description" content="PHP Class Dynamic Project">
     <meta name="keywords" content="php, programming, byui, photography">
@@ -18,6 +19,12 @@
       } else {
         $menu["Login"] = "register";
       }
+
+      if (isset($_SESSION["is_admin"])) {
+        $menu["Users"] = "users";
+        $menu["DSLR"] = "dslr";
+      }
+
       foreach(array_keys($menu) as $key){
         echo '<a class="nav-a';
         if ( ''.$action == $menu[$key] )
@@ -27,3 +34,17 @@
       }
       ?>
     </header>
+    <section>
+      <?php if (isset($error)) { ?>
+        <p class="error">
+          <?php echo $error; ?>
+        </p>
+      <?php } ?>
+    </section>
+    <section>  
+    <?php if (isset($message)) { ?>
+      <p class="message">
+        <?php echo $message; ?>
+      </p>
+    <?php } ?>
+  </section>

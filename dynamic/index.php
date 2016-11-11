@@ -3,6 +3,8 @@ require('model/database.php');
 require('model/photo_db.php');
 require('model/user_db.php');
 require('model/photo_fs.php');
+require('lib/exec.php');
+
 session_start();
 
 $action = filter_input(INPUT_POST, 'action');
@@ -14,8 +16,10 @@ if ($action == NULL) {
 }
 
 function display_users() {
-  $users = get_users();
-  include('views/users.php');
+  if (isset($_SESSION["is_admin"])) {
+    $users = get_users();
+    include('views/users.php');
+  }
 }
 
 if ($action == 'register') {
@@ -39,8 +43,8 @@ if ($action == 'register') {
   display_users();
 } else if ($action == 'insert_user') {
   $email = filter_input(INPUT_POST, 'email');
-  $username = filter_input(INPUT_POST, 'username');
-  $password = filter_input(INPUT_POST, 'password');
+  $username = filter_input(INPUT_POST, 'new-username');
+  $password = filter_input(INPUT_POST, 'new-password');
   if ($username == NULL || $username == FALSE || $password == NULL ||
           $password == FALSE || $email == NULL || $email == FALSE) {
       $error = "Invalid user data. Check all fields and try again.";
@@ -48,7 +52,7 @@ if ($action == 'register') {
   } else {
     if (insert_user($username, $password, $email)) {
       header("Location: .?action=users");
-    } else {
+    } else { //TODO: fix these logics
       $error = "Account already exists.";
       include('views/login-register.php');
     }
@@ -93,20 +97,91 @@ if ($action == 'register') {
 
   if (login($username, $password)) {
     $_SESSION["logged_in"] = $username;
+    $_SESSION["is_admin"] = is_admin($user_id);
     header("Location: .?action=home");
   } else {
     $error = "Password/username mismatch. Please try again, unless you are a hacker.";
     include('views/login-register.php');
   }
 } else if ($action == 'logout') {
-  unset($_SESSION["logged_in"]);
-  echo "Logged out, redirecting...";
-	header( "Refresh:3; url=.?action=home", true, 303);
+  session_unset();
+  session_destroy();
+  session_write_close();
+  setcookie(session_name(),'',0,'/');
+  session_regenerate_id(true);
+  echo "Logged out, redirecting in a second...";
+	header( "Refresh:1; url=.?action=home", true, 303);
 	die();
 } else if ($action == 'hide_album') {
   $album_name = filter_input(INPUT_POST, 'album_name');
   hide_album($album_name);
   header("Location: .?action=album&album=$album_name");
-}
+} else if ($action == 'dslr') {
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+  include('views/dslr.php');
+} else if ($action == 'download_from_dslr') {
+  $new_album = filter_input(INPUT_POST, 'new_album');
+  if ($new_album == NULL || $new_album == FALSE) {
+    $error = "No album name specified. Check all fields and try again.";
+    include('views/dslr.php');
+  } else {
+    $cmd = 'bash scripts/download_from_dslr.sh '.escapeshellarg($new_album);
+    shell_async($cmd);
+  }
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+  $message = "Breathe in. Breathe out. Repeat until photos are downloaded to ".$new_album.".";
+  include('views/dslr.php');
+} else if ($action == 'optimize') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
+  $optimization_type = filter_input(INPUT_POST, 'optimization_type');
+  $album_name = filter_input(INPUT_POST, 'album_name');
 
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+
+  if ($optimization_type == NULL || $optimization_type == FALSE ||
+      $album_name == NULL || $album_name == FALSE) {
+    $error = "No album name specified. Check all fields and try again.";
+    include('views/dslr.php');
+  } else {
+    if ($optimization_type == 'thumbs') {
+      $cmd = 'bash scripts/create_thumbs.sh '.escapeshellarg($album_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
+      shell_async($cmd);
+    } else if ($optimization_type == 'webs') {
+      $cmd = 'bash scripts/create_webs.sh '.escapeshellarg($album_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
+      shell_async($cmd);
+    } else {
+      $error = "No optimization type specified. Check all fields and try again.";
+      include('views/dslr.php');
+    }
+    $message = "Breathe in. Breathe out. Repeat until ".$optimization_type." for ".$album_name." are created.";
+    include('views/dslr.php');
+  }
+} else if ($action == 'set_album_thumb') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
+  $album_name = filter_input(INPUT_GET, 'album_name');
+  $photo_name = filter_input(INPUT_GET, 'photo_name');
+
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+
+  if ($album_name == NULL || $album_name == FALSE ||
+      $photo_name == NULL || $photo_name == FALSE) {
+    $error = "Missing album or photo name. Check all fields and try again.";
+    include('views/dslr.php');
+  } else {
+    $cmd = 'bash scripts/create_album_thumb.sh '.escapeshellarg($album_name).' '.escapeshellarg($photo_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
+    shell_async($cmd);
+    $message = "Album thumb ".$album_name."/".$photo_name." created.";
+    include('views/dslr.php');
+  }
+}
 ?>

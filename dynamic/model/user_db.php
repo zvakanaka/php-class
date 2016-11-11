@@ -47,6 +47,7 @@ function insert_user($username, $password, $email) {
                                  WHERE username=:username');
   	$exists_stmt->bindValue(":username", $username);
   	$exists_stmt->execute();
+    $user_exists = false;
   	while ($row = $exists_stmt->fetch()) {
   		$user_exists = true;
   	}

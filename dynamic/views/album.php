@@ -1,17 +1,6 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 
 <main>
-<?php if (isset($message)) { ?>
-  <p class="message">
-    <?php echo $message; ?>
-  </p>
-<?php } ?>
-
-<?php if (isset($error)) { ?>
-  <p class="error">
-    <?php echo $error; ?>
-  </p>
-<?php } ?>
 
 <?php foreach ($images as $image) { ?>
     <a class="thumb-link" id="thumb-<?php echo $image;?>" href="javascript:void(0)"

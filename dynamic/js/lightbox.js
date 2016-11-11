@@ -6,10 +6,10 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
   document.getElementById('download-link').setAttribute('download', img);
 
-  document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').previousSibling.click();`);
-  document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').nextSibling.click();`);
+  document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').previousElementSibling.click();`);
+  document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').nextElementSibling.click();`);
 
-  document.getElementById('set-as-album-thumb').setAttribute('href', `set_album_thumb.php?album=${album}&thumb=${img}`);
+  document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${img}`);
   document.getElementById('light').style.display = 'block';
   document.getElementById('fade').style.display = 'block';
 }

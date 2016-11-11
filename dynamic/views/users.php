@@ -1,14 +1,18 @@
+<?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 <main>
-
     <h1>Users</h1>
     <table>
         <tr>
-            <th>Name</th>
-            <th>&nbsp;</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Admin</th>
+          <th>&nbsp;</th>
         </tr>
         <?php foreach ($users as $user) : ?>
             <tr>
               <td><?php echo $user['username']; ?></td>
+              <td><?php echo $user['email']; ?></td>
+              <td><?php echo ($user['is_admin'] == 1) ? "✓" : "✗";?></td>
               <td><form action="." method="post">
                   <input type="hidden" name="action" value="delete_user">
                   <input type="hidden" name="user_id"
@@ -18,6 +22,5 @@
             </tr>
         <?php endforeach; ?>
     </table>
-
-
 </main>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>
