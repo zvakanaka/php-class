@@ -1,6 +1,4 @@
 <?php
-require('lib/password.php');
-
 function login($username, $password) {
   global $db;
   $statement = $db->prepare('SELECT * FROM users
@@ -38,6 +36,17 @@ function get_users() {
   $statement = $db->prepare($query);
   $statement->execute();
   return $statement;
+}
+
+function get_user_id($username) {
+  global $db;
+  $query = 'SELECT user_id FROM users
+            WHERE username = :username';
+  $statement = $db->prepare($query);
+  $statement->bindValue(":username", $username);
+  $statement->execute();
+  $user_id = $statement->fetch();
+  return $user_id['user_id'];
 }
 
 function insert_user($username, $password, $email) {

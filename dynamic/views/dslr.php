@@ -47,6 +47,10 @@
         <input type="text" name="server_name"<?php if(isset($server_name)) echo " value='$server_name'";?>/>
         <br>
 
+        <label>User Name (On server):</label>
+        <input type="text" name="username"<?php if(isset($username)) echo " value='$username'";?>/>
+        <br>
+
         <label>Album:</label>
         <select name="album_name">
           <option disabled selected value> -- select an album -- </option>

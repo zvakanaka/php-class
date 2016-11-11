@@ -97,7 +97,10 @@ if ($action == 'register') {
 
   if (login($username, $password)) {
     $_SESSION["logged_in"] = $username;
-    $_SESSION["is_admin"] = is_admin($user_id);
+    $user_id = get_user_id($username);
+    if (is_admin($user_id)) {
+      $_SESSION["is_admin"] = true;
+    }
     header("Location: .?action=home");
   } else {
     $error = "Password/username mismatch. Please try again, unless you are a hacker.";
@@ -160,6 +163,29 @@ if ($action == 'register') {
       include('views/dslr.php');
     }
     $message = "Breathe in. Breathe out. Repeat until ".$optimization_type." for ".$album_name." are created.";
+    include('views/dslr.php');
+  }
+}  else if ($action == 'upload_to_server') {
+  if (!isset($_SESSION["is_admin"])) {// authenticate
+    $error = "Imposter! You are not an administrator.";
+    include('views/dslr.php');
+  }
+  $username = filter_input(INPUT_POST, 'username');
+  $server_name = filter_input(INPUT_POST, 'server_name');
+  $album_name = filter_input(INPUT_POST, 'album_name');
+
+  $photo_dir = "../../photo";
+  $albums = get_albums($photo_dir, array());
+
+  if ($username == NULL || $username == FALSE ||
+      $server_name == NULL || $server_name == FALSE ||
+      $album_name == NULL || $album_name == FALSE) {
+    $error = "Missing upload field(s). Check all fields and try again.";
+    include('views/dslr.php');
+  } else {
+    $cmd = 'bash scripts/upload_to_server.sh '.escapeshellarg($album_name).' '.escapeshellarg($server_name).' '.escapeshellarg($username);
+    shell_async($cmd);
+    $message = "Breathe in. Breathe out. Repeat until ".$album_name." is uploaded to ".$server_name.".";
     include('views/dslr.php');
   }
 } else if ($action == 'set_album_thumb') {
