@@ -7,5 +7,15 @@
     </a>
 <?php } ?>
 </main>
+<?php if ($_SESSION['is_admin']) {
+  if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
+    <section>
+      <a href="?action=home&hidden=true">Show Hidden Albums</a>
+    </section>
+<?php } else { ?>
+  <section>
+    <a href="?action=home">Hide Hidden Albums</a>
+  </section>
+<?php }} ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>

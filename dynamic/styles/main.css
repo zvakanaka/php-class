@@ -31,10 +31,14 @@ header a.on, header a:hover {
     border-radius: 0px;
 }
 
-main {
+main, section {
   margin-left: 10px;
   margin-right: 4px;
 }
+section {
+  margin-top: 10px;
+}
+
 input {
   margin-bottom: 15px;
 }
@@ -60,5 +64,5 @@ footer a {
 }
 
 .message {
-  color: lime;  
+  color: lime;
 }
