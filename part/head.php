@@ -22,7 +22,7 @@
         <?php
 
         $urlName = $path_parts['filename'];
-        $menu = array("Exercises" => "assignments", "Photo" => "pics");
+        $menu = array("Exercises" => "assignments", "Dynamic" => "dynamic/index");
         foreach(array_keys($menu) as $key){
           echo '<li class="nav-li"><a ';
           if ( ''.$urlName == $menu[$key] )
