@@ -28,6 +28,7 @@
 </div>
 <div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
 </div>
+
 <!-- end lightbox -->
 <script src="js/lightbox.js"></script>
 <noscript id="deferred-styles">

@@ -259,6 +259,7 @@ if ($action == 'register') {
   }
   $album_name = filter_input(INPUT_GET, 'album_name');
   $photo_name = filter_input(INPUT_GET, 'photo_name');
+  $next_photo = filter_input(INPUT_GET, 'next_photo');
 
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -271,7 +272,7 @@ if ($action == 'register') {
     $cmd = 'bash scripts/delete_photo.sh '.escapeshellarg($album_name).' '.escapeshellarg($photo_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
     shell_async($cmd);
     echo $album_name."/".$photo_name." deleted.";
-    header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
+    header("Refresh:1; url=.?action=album&album=$album_name&photo=$next_photo", true, 303);
   }
 } else if ($action == 'favorite') {
   $album_name = filter_input(INPUT_GET, 'album_name');
@@ -285,7 +286,7 @@ if ($action == 'register') {
     $user_id = get_user_id($_SESSION['logged_in']);
     insert_favorite($album_name, $photo_name, $user_id);
     echo $album_name."/".$photo_name." favorited.";
-    header("Refresh:1; url=.?action=album&album=$album_name", true, 303);
+    header("Refresh:1; url=.?action=album&album=$album_name&photo=$photo_name", true, 303);
   }
 } else if ($action == 'review_favorites') {
   $user_id = filter_input(INPUT_GET, 'user_id');

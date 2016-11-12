@@ -36,3 +36,13 @@
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/lightbox.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>
+
+<!-- if query string photo, open lightbox for it -->
+<?php if (filter_input(INPUT_GET, 'photo')) {
+  $photo = filter_input(INPUT_GET, 'photo');
+?>
+    <script type="text/javascript">
+      var thumbToClick = document.getElementById('<?php echo "thumb-".$photo;?>');
+      thumbToClick.click();
+    </script>
+<?php } ?>
