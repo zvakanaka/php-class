@@ -22,4 +22,4 @@ fi
 
 echo $(date) Uploading $1 to $3@$2 >> log.txt
 
-rsync -av $photo_dir/$1 $3@$2:$remote_path/
+rsync -av --chown=www-data:www-data $photo_dir/$1 $3@$2:$remote_path/
