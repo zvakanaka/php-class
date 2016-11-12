@@ -6,9 +6,9 @@ function login($username, $password) {
   $statement->bindValue(':username', $username);
   $statement->execute();
   while ($row = $statement->fetch()) {
-    //if (password_verify($password, $row['password'])) {
-    if ($password == $row['password']) {
-      return true;
+    error_log($password.' '.$row['password']);
+    if (password_verify($password, $row['password'])) {
+        return true;
     }
   }
   return false;
@@ -71,32 +71,31 @@ function get_user_email($user_id) {
 }
 
 function insert_user($username, $password, $email) {
-    global $db;
-  	$user_exists = false;
-  	$exists_stmt = $db->prepare('SELECT username FROM users
-                                 WHERE username=:username');
-  	$exists_stmt->bindValue(":username", $username);
-  	$exists_stmt->execute();
-    $user_exists = false;
-  	while ($row = $exists_stmt->fetch()) {
-  		$user_exists = true;
-  	}
-  	if ($user_exists == true) {
-  		return false;
-  	} else {
-      $query = 'INSERT INTO users VALUES
-                (NULL, :username, :password, :email, 0)';
-  		$statement = $db->prepare($query);
-  		$statement->bindValue(":username", $username);
-      $password_hash = password_hash($password, PASSWORD_DEFAULT);
-  		// $statement->bindValue(":password", $password_hash);
-      //TODO: get password hashing working
-      $statement->bindValue(":password", $password);
-      $statement->bindValue(':email', $email);
-  		$statement->execute();
-      $statement->closeCursor();
-      return true;
-  	}
+  global $db;
+	$user_exists = false;
+	$exists_stmt = $db->prepare('SELECT username FROM users
+                               WHERE username=:username');
+	$exists_stmt->bindValue(":username", $username);
+	$exists_stmt->execute();
+  $user_exists = false;
+	while ($row = $exists_stmt->fetch()) {
+		$user_exists = true;
+	}
+	if ($user_exists == true) {
+		return false;
+	} else {
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    $query = 'INSERT INTO users VALUES
+              (NULL, :username, :password, :email, 0)';
+		$statement = $db->prepare($query);
+		$statement->bindValue(":username", $username);
+		$statement->bindValue(":password", $password_hash);
+    // $statement->bindValue(":password", $password);
+    $statement->bindValue(':email', $email);
+		$statement->execute();
+    $statement->closeCursor();
+    return true;
+	}
 }
 
 function delete_user($user_id) {

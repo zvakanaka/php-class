@@ -24,7 +24,7 @@ USE `photo_db` ;
 CREATE TABLE IF NOT EXISTS `photo_db`.`users` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
+  `password` VARCHAR(128) NULL,
   `email` VARCHAR(45) NULL,
   `is_admin` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`user_id`))
