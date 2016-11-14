@@ -9,7 +9,7 @@ session_start();
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
-  $action = filter_input(INPUT_GET, 'action');
+  $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
   if ($action == NULL) {
     $action = 'register';
   }
@@ -31,7 +31,7 @@ if ($action == 'register') {
     $album_blacklist[] = $album['album_name'];
   }
   $photo_dir = "../../photo";
-  $show_hidden = filter_input(INPUT_GET, 'hidden');
+  $show_hidden = filter_input(INPUT_GET, 'hidden', FILTER_SANITIZE_STRING);
   if ($show_hidden == 'true') {
     $albums = get_albums($photo_dir, array());
     include('views/home.php');
@@ -42,15 +42,25 @@ if ($action == 'register') {
 } else if ($action == 'users') {
   display_users();
 } else if ($action == 'insert_user') {
-  $email = filter_input(INPUT_POST, 'email');
-  $username = filter_input(INPUT_POST, 'new-username');
-  $password = filter_input(INPUT_POST, 'new-password');
-  if ($username == NULL || $username == FALSE || $password == NULL ||
-          $password == FALSE || $email == NULL || $email == FALSE) {
+  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+  $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+  $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+  $username = filter_input(INPUT_POST, 'new-username', FILTER_SANITIZE_STRING);
+  $password = filter_input(INPUT_POST, 'new-password', FILTER_SANITIZE_STRING);
+  $confirm_password = filter_input(INPUT_POST, 'confirm-new-password', FILTER_SANITIZE_STRING);
+  if ($username == NULL || $username == FALSE ||
+          $firstname == NULL || $firstname == FALSE ||
+          $lastname == NULL || $lastname == FALSE ||
+          $password == NULL || $password == FALSE ||
+          $confirm_password == NULL || $confirm_password == FALSE ||
+          $email == NULL || $email == FALSE) {
       $error = "Invalid user data. Check all fields and try again.";
       include('views/login-register.php');
+  } else if ($password != $confirm_password) {
+    $error = "Password and confirmation does not match. Try again.";
+    include('views/login-register.php');
   } else {
-    if (insert_user($username, $password, $email) == true) {
+    if (insert_user($firstname, $lastname, $username, $password, $email) == true) {
       $_SESSION["logged_in"] = $username;
       $user_id = get_user_id($username);
       if (is_admin($user_id)) {
@@ -71,7 +81,7 @@ if ($action == 'register') {
   delete_user($user_id);
   display_users();
 } else if ($action == 'album') {
-  $album = filter_input(INPUT_GET, 'album');
+  $album = filter_input(INPUT_GET, 'album', FILTER_SANITIZE_STRING);
   if ($album == NULL) {
     $error = "No album. Try again.";
     //TODO: redirect to home
@@ -90,7 +100,7 @@ if ($action == 'register') {
     $message = "This album is unlisted. Anyone with the link can see it.";
   }
   $photo_dir = "../../photo";
-  $show_hidden = filter_input(INPUT_GET, 'hidden');
+  $show_hidden = filter_input(INPUT_GET, 'hidden', FILTER_SANITIZE_STRING);
   if ($show_hidden == 'true') {
     $images = get_images($photo_dir, $album, array());
     include('views/album.php');
@@ -99,8 +109,8 @@ if ($action == 'register') {
     include('views/album.php');
   }
 } else if ($action == 'authenticate') {
-  $username = filter_input(INPUT_POST, 'username');
-  $password = filter_input(INPUT_POST, 'password');
+  $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+  $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
   if ($username == NULL || $username == FALSE || $password == NULL ||
           $password == FALSE) {
       $error = "Invalid user data. Check all fields and try again.";
@@ -127,7 +137,7 @@ if ($action == 'register') {
 	header( "Refresh:1; url=.?action=home", true, 303);
 	die();
 } else if ($action == 'hide_album') {
-  $album_name = filter_input(INPUT_POST, 'album_name');
+  $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
   hide_album($album_name);
   header("Location: .?action=album&album=$album_name");
 } else if ($action == 'dslr') {
@@ -143,7 +153,7 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $new_album = filter_input(INPUT_POST, 'new_album');
+  $new_album = filter_input(INPUT_POST, 'new_album', FILTER_SANITIZE_STRING);
   if ($new_album == NULL || $new_album == FALSE) {
     $error = "No album name specified. Check all fields and try again.";
     include('views/dslr.php');
@@ -160,8 +170,8 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $optimization_type = filter_input(INPUT_POST, 'optimization_type');
-  $album_name = filter_input(INPUT_POST, 'album_name');
+  $optimization_type = filter_input(INPUT_POST, 'optimization_type', FILTER_SANITIZE_STRING);
+  $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
 
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -189,9 +199,9 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $username = filter_input(INPUT_POST, 'username');
-  $server_name = filter_input(INPUT_POST, 'server_name');
-  $album_name = filter_input(INPUT_POST, 'album_name');
+  $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+  $server_name = filter_input(INPUT_POST, 'server_name', FILTER_SANITIZE_STRING);
+  $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
 
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -212,8 +222,8 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $album_name = filter_input(INPUT_GET, 'album_name');
-  $photo_name = filter_input(INPUT_GET, 'photo_name');
+  $album_name = filter_input(INPUT_GET, 'album_name', FILTER_SANITIZE_STRING);
+  $photo_name = filter_input(INPUT_GET, 'photo_name', FILTER_SANITIZE_STRING);
 
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -233,12 +243,12 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $album_name = filter_input(INPUT_GET, 'album_name');
-  $photo_name = filter_input(INPUT_GET, 'photo_name');
+  $album_name = filter_input(INPUT_GET, 'album_name', FILTER_SANITIZE_STRING);
+  $photo_name = filter_input(INPUT_GET, 'photo_name', FILTER_SANITIZE_STRING);
   if ($album_name == NULL || $album_name == FALSE ||
       $photo_name == NULL || $photo_name == FALSE) {
-    $album_name = filter_input(INPUT_POST, 'album_name');
-    $photo_name = filter_input(INPUT_POST, 'photo_name');
+    echo "Error: Photo or Album name is missing.";
+    header("Refresh:2; url=.?action=home", true, 303);
   }
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -257,9 +267,9 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $album_name = filter_input(INPUT_GET, 'album_name');
-  $photo_name = filter_input(INPUT_GET, 'photo_name');
-  $next_photo = filter_input(INPUT_GET, 'next_photo');
+  $album_name = filter_input(INPUT_GET, 'album_name', FILTER_SANITIZE_STRING);
+  $photo_name = filter_input(INPUT_GET, 'photo_name', FILTER_SANITIZE_STRING);
+  $next_photo = filter_input(INPUT_GET, 'next_photo', FILTER_SANITIZE_STRING);
 
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -275,8 +285,8 @@ if ($action == 'register') {
     header("Refresh:1; url=.?action=album&album=$album_name&photo=$next_photo", true, 303);
   }
 } else if ($action == 'favorite') {
-  $album_name = filter_input(INPUT_GET, 'album_name');
-  $photo_name = filter_input(INPUT_GET, 'photo_name');
+  $album_name = filter_input(INPUT_GET, 'album_name', FILTER_SANITIZE_STRING);
+  $photo_name = filter_input(INPUT_GET, 'photo_name', FILTER_SANITIZE_STRING);
 
   if ($album_name == NULL || $album_name == FALSE ||
       $photo_name == NULL || $photo_name == FALSE) {
@@ -289,7 +299,7 @@ if ($action == 'register') {
     header("Refresh:1; url=.?action=album&album=$album_name&photo=$photo_name", true, 303);
   }
 } else if ($action == 'review_favorites') {
-  $user_id = filter_input(INPUT_GET, 'user_id');
+  $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
 
   if ($user_id == NULL || $user_id == FALSE) {
     echo "Error: No user id provided";
@@ -306,7 +316,7 @@ if ($action == 'register') {
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
   }
-  $user_id = filter_input(INPUT_GET, 'user_id');
+  $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
   if ($user_id == NULL || $user_id == FALSE) {
       echo "Error: No user id supplied.";
       header("Refresh:2; url=.?action=users", true, 303);

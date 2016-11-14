@@ -1,4 +1,7 @@
 <?php
+//for older php servers:
+require('lib/password.php');
+
 function login($username, $password) {
   global $db;
   $statement = $db->prepare('SELECT * FROM users
@@ -70,7 +73,7 @@ function get_user_email($user_id) {
   return $user_id['email'];
 }
 
-function insert_user($username, $password, $email) {
+function insert_user($firstname, $lastname, $username, $password, $email) {
   global $db;
 	$user_exists = false;
 	$exists_stmt = $db->prepare('SELECT username FROM users
@@ -86,11 +89,12 @@ function insert_user($username, $password, $email) {
 	} else {
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
     $query = 'INSERT INTO users VALUES
-              (NULL, :username, :password, :email, 0)';
+              (NULL, :firstname, :lastname, :username, :password, :email, 0)';
 		$statement = $db->prepare($query);
+    $statement->bindValue(":firstname", $firstname);
+    $statement->bindValue(":lastname", $lastname);
 		$statement->bindValue(":username", $username);
 		$statement->bindValue(":password", $password_hash);
-    // $statement->bindValue(":password", $password);
     $statement->bindValue(':email', $email);
 		$statement->execute();
     $statement->closeCursor();
