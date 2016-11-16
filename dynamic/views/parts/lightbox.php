@@ -17,7 +17,7 @@
       <br><a id="favorite" class="fave-glyph<?php echo $user_att;?>"></a>
       <br>
       <?php if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] == false) {
-        $admin_att = " class='hidden' ";
+        $admin_att = " hidden";
       } else { $admin_att = "";}?>
       <br><a id="set-as-album-thumb" class="thumb-glyph<?php echo $admin_att;?>"></a>
       <br><a id="move-to-trash" class="hide-glyph<?php echo $admin_att;?>">Hide</a>
