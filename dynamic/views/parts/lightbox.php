@@ -10,20 +10,18 @@
     <br><a class="arrow-glyph right-glyph" href='javascript:void(0)' id="next-picture"></a>
     <br>
 
-    <?php if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] == false) {
-      $admin_att = " class='hidden' ";
-    } else { $admin_att = "";}?>
-      <br><a id="set-as-album-thumb" <?php echo $admin_att;?>>Set as Album Thumb</a>
-      <br>
 
       <?php if (!isset($_SESSION['logged_in'])) {
         $user_att = " hidden";
       } else { $user_att = "";}?>
       <br><a id="favorite" class="fave-glyph<?php echo $user_att;?>"></a>
       <br>
-
-      <br><a id="move-to-trash" <?php echo $admin_att;?>>Hide</a>
-      <br><a id="delete-photo" <?php echo $admin_att;?>>Delete</a>
+      <?php if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] == false) {
+        $admin_att = " class='hidden' ";
+      } else { $admin_att = "";}?>
+      <br><a id="set-as-album-thumb" class="thumb-glyph<?php echo $admin_att;?>"></a>
+      <br><a id="move-to-trash" class="hide-glyph<?php echo $admin_att;?>">Hide</a>
+      <br><a id="delete-photo" class="delete-glyph<?php echo $admin_att;?>">Delete</a>
   </div>
 </div>
 <div id="fade" class="lightbox-bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">

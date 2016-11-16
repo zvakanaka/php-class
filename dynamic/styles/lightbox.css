@@ -86,7 +86,7 @@
 }
 
 .rotate-glyph {
-  top: 285px;
+  top: 275px;
   border-radius: 50%;
   border: 1px solid #FFF;
   border-color:#FFF transparent #FFF #FFF;
@@ -106,6 +106,45 @@
   height: 15px;
 }
 
+.thumb-glyph {
+  top: 390px;
+  border: 1px solid #FFF;
+  border-color: #FFF;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  transform: translateX(-20px);
+}
+
+.thumb-glyph:before {
+  position: absolute;
+  content: '';
+  border: solid #FFF;
+  border-width: 1px;
+  transform: translate(15px, 15px);
+  width: 15px;
+  height: 15px;
+}
+
+.hide-glyph {
+  top: 460px;
+  border: 1px solid #FFF;
+  border-color: #FFF;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  transform: translateX(-20px);
+}
+
+.delete-glyph {
+  top: 530px;
+  border: 1px solid #FFF;
+  border-color: #FFF;
+  width: 60px;
+  height: 45px;
+  position: absolute;
+  transform: translateX(-20px);
+}
 
 .lightbox-fg {
   display: none;
@@ -121,7 +160,7 @@
 
 /* From https://css-tricks.com/examples/ShapesOfCSS/ */
 .fave-glyph {
-  top: 390px;
+  top: 360px;
   position: absolute;
   color: #FF4;
   width: 0px;
