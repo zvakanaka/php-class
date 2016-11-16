@@ -71,9 +71,15 @@ footer a {
   display: none;
 }
 
-input, label {
-  display: block;
-}
-fieldset {
-  border: none;
+@media screen and (max-aspect-ratio: 3/2) {
+  input, label {
+    display: block;
+  }
+  fieldset {
+    border: none;
+  }
+  .thumb {
+    width: 48%;
+    height: auto;
+  }
 }
