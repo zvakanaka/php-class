@@ -20,12 +20,23 @@
     <form action="." method="post" id="registration_form">
         <input type="hidden" name="action" value="insert_user">
 
+        <label>First Name:</label>
+        <input type="text" name="firstname"<?php if(isset($firstname)) echo " value='$firstname'";?>/>
+        <br>
+
+        <label>Last Name:</label>
+        <input type="text" name="lastname"<?php if(isset($lastname)) echo " value='$lastname'";?>/>
+        <br>
+
         <label>Username:</label>
         <input type="text" name="new-username"<?php if(isset($username)) echo " value='$username'";?>/>
         <br>
 
         <label>Password:</label>
-        <input type="password" name="new-password"<?php if(isset($password)) echo " value='$password'";?>/>
+        <input type="password" name="new-password"/>
+        <br>
+        <label>Confirm Password:</label>
+        <input type="password" name="confirm-new-password"/>
         <br>
 
         <label>Email:</label>
