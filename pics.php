@@ -19,7 +19,7 @@ if ($handle = opendir('../photo')) {
 </ul>
 <br><br>
 <!-- lightbox -->
-<div id="light" class="lightbox_fg">
+<div id="light" class="lightbox-fg">
   <img id="lightbox-picture"/>
   <div id="lightbox-sidebar">
     <a id="close-lightbox" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
@@ -31,7 +31,7 @@ if ($handle = opendir('../photo')) {
 
   </div>
 </div>
-<div id="fade" class="lightbox_bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+<div id="fade" class="lightbox-bg" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
 </div>
 <!-- end lightbox -->
 <article>

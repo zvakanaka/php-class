@@ -19,11 +19,13 @@ function display_users() {
   if (isset($_SESSION["is_admin"])) {
     $users = get_users();
     include('views/users.php');
+    die();
   }
 }
 
 if ($action == 'register') {
   include('views/login-register.php');
+  die();
 } else if ($action == 'home') {
   $album_blacklist = array();
   $hidden_albums = get_hidden_albums();
@@ -35,9 +37,11 @@ if ($action == 'register') {
   if ($show_hidden == 'true') {
     $albums = get_albums($photo_dir, array());
     include('views/home.php');
+    die();
   } else {
     $albums = get_albums($photo_dir, $album_blacklist);
     include('views/home.php');
+    die();
   }
 } else if ($action == 'users') {
   display_users();
@@ -49,6 +53,7 @@ if ($action == 'register') {
           $password == FALSE || $email == NULL || $email == FALSE) {
       $error = "Invalid user data. Check all fields and try again.";
       include('views/login-register.php');
+      die();
   } else {
     if (insert_user($username, $password, $email) == true) {
       $_SESSION["logged_in"] = $username;
@@ -60,6 +65,7 @@ if ($action == 'register') {
     } else {
       $error = "Account already exists.";
       include('views/login-register.php');
+      die();
     }
   }
 } else if ($action == 'delete_user') {
@@ -94,9 +100,11 @@ if ($action == 'register') {
   if ($show_hidden == 'true') {
     $images = get_images($photo_dir, $album, array());
     include('views/album.php');
+    die();
   } else {
     $images = get_images($photo_dir, $album, $image_blacklist);
     include('views/album.php');
+    die();
   }
 } else if ($action == 'authenticate') {
   $username = filter_input(INPUT_POST, 'username');
@@ -105,6 +113,7 @@ if ($action == 'register') {
           $password == FALSE) {
       $error = "Invalid user data. Check all fields and try again.";
       include('views/login-register.php');
+      die();
   }
 
   if (login($username, $password)) {
@@ -117,6 +126,7 @@ if ($action == 'register') {
   } else {
     $error = "Password/username mismatch. Please try again, unless you are a hacker.";
     include('views/login-register.php');
+    die();
   }
 } else if ($action == 'logout') {
   session_unset();
@@ -136,17 +146,20 @@ if ($action == 'register') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   include('views/dslr.php');
 } else if ($action == 'download_from_dslr') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $new_album = filter_input(INPUT_POST, 'new_album');
   if ($new_album == NULL || $new_album == FALSE) {
     $error = "No album name specified. Check all fields and try again.";
     include('views/dslr.php');
+    die();
   } else {
     $cmd = 'bash scripts/download_from_dslr.sh '.escapeshellarg($new_album);
     shell_async($cmd);
@@ -155,10 +168,12 @@ if ($action == 'register') {
   $albums = get_albums($photo_dir, array());
   $message = "Breathe in. Breathe out. Repeat until photos are downloaded to ".$new_album.".";
   include('views/dslr.php');
+  die();
 } else if ($action == 'optimize') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $optimization_type = filter_input(INPUT_POST, 'optimization_type');
   $album_name = filter_input(INPUT_POST, 'album_name');
@@ -170,6 +185,7 @@ if ($action == 'register') {
       $album_name == NULL || $album_name == FALSE) {
     $error = "No album name specified. Check all fields and try again.";
     include('views/dslr.php');
+    die();
   } else {
     if ($optimization_type == 'thumbs') {
       $cmd = 'bash scripts/create_thumbs.sh '.escapeshellarg($album_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
@@ -180,14 +196,17 @@ if ($action == 'register') {
     } else {
       $error = "No optimization type specified. Check all fields and try again.";
       include('views/dslr.php');
+      die();
     }
     $message = "Breathe in. Breathe out. Repeat until ".$optimization_type." for ".$album_name." are created.";
     include('views/dslr.php');
+    die();
   }
 }  else if ($action == 'upload_to_server') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $username = filter_input(INPUT_POST, 'username');
   $server_name = filter_input(INPUT_POST, 'server_name');
@@ -201,16 +220,19 @@ if ($action == 'register') {
       $album_name == NULL || $album_name == FALSE) {
     $error = "Missing upload field(s). Check all fields and try again.";
     include('views/dslr.php');
+    die();
   } else {
     $cmd = 'bash scripts/upload_to_server.sh '.escapeshellarg($album_name).' '.escapeshellarg($server_name).' '.escapeshellarg($username);
     shell_async($cmd);
     $message = "Breathe in. Breathe out. Repeat until ".$album_name." is uploaded to ".$server_name.".";
     include('views/dslr.php');
+    die();
   }
 } else if ($action == 'set_album_thumb') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $album_name = filter_input(INPUT_GET, 'album_name');
   $photo_name = filter_input(INPUT_GET, 'photo_name');
@@ -222,16 +244,19 @@ if ($action == 'register') {
       $photo_name == NULL || $photo_name == FALSE) {
     $error = "Missing album or photo name. Check all fields and try again.";
     include('views/dslr.php');
+    die();
   } else {
     $cmd = 'bash scripts/create_album_thumb.sh '.escapeshellarg($album_name).' '.escapeshellarg($photo_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
     shell_async($cmd);
     $message = "Album thumb ".$album_name."/".$photo_name." created.";
     include('views/dslr.php');
+    die();
   }
 } else if ($action == 'move_to_trash') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $album_name = filter_input(INPUT_GET, 'album_name');
   $photo_name = filter_input(INPUT_GET, 'photo_name');
@@ -256,6 +281,7 @@ if ($action == 'register') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $album_name = filter_input(INPUT_GET, 'album_name');
   $photo_name = filter_input(INPUT_GET, 'photo_name');
@@ -300,11 +326,13 @@ if ($action == 'register') {
   } else {
     $faves = get_favorites($user_id);
     include('views/favorites.php');
+    die();
   }
 } else if ($action == 'zip_favorites') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
+    die();
   }
   $user_id = filter_input(INPUT_GET, 'user_id');
   if ($user_id == NULL || $user_id == FALSE) {

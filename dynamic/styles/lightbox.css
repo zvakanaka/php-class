@@ -1,4 +1,4 @@
-.lightbox_bg{
+.lightbox-bg{
   display: none;
   position: fixed;
   top: 0%;
@@ -11,20 +11,157 @@
   opacity:.80;
   filter: alpha(opacity=80);
 }
-.lightbox_fg {
+
+.lightbox-close:before {
+    transform: rotate(-45deg);
+}
+
+.lightbox-close:after {
+    transform: rotate(45deg);
+}
+
+.lightbox-close:after, .lightbox-close:before {
+    position: absolute;
+    content: '';
+    height: 64px;
+    width: 1px;
+    background-color: #FFF;
+}
+
+.lightbox-close {
+  top: 5px;
+  border-radius: 16px;
+  border-radius: 16px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.arrow-glyph {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.arrow-glyph:before, .arrow-glyph::after {
+  position: absolute;
+  content: '';
+  border: solid #FFF;
+}
+.arrow-glyph:after {
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg) translate(-5px, 16px);
+  width: 30px;
+  height: 30px;
+}
+.arrow-glyph:before {
+  border-width: 0 1px 0 0;
+  transform: rotate(0deg);
+  height: 45px;
+}
+
+.arrow-glyph.download-glyph:before, .arrow-glyph.download-glyph:after {
+  top: 75px;
+}
+
+.arrow-glyph.left-glyph:before, .arrow-glyph.left-glyph:after {
+  top: 150px;
+}
+
+.left-glyph:after {
+  transform: rotate(135deg) translate(16px, 6px);
+}
+.left-glyph:before {
+  transform: rotate(90deg);
+}
+
+.arrow-glyph.right-glyph:before, .arrow-glyph.right-glyph:after {
+  top: 215px;
+}
+
+.right-glyph:after {
+  transform: rotate(315deg) translate(-14px, -4px);
+}
+.right-glyph:before {
+  transform: rotate(90deg);
+}
+
+.rotate-glyph {
+  border-radius: 50%;
+  border: 1px solid #FFF;
+  border-color:#FFF transparent #FFF #FFF;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  top: 300px;
+  transform: translateX(-20px);
+}
+
+.rotate-glyph:before {
+  position: absolute;
+  content: '';
+  border: solid #FFF;
+  border-width: 0 1px 1px 0;
+  transform: rotate(-25deg) translate(22px, 4px);
+  width: 15px;
+  height: 15px;
+}
+
+
+.lightbox-fg {
   display: none;
   position: fixed;
   top: 2%;
   left: 1%;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   padding: 0px;
   z-index:1002;
   overflow: hidden;
 }
+
+/* From https://css-tricks.com/examples/ShapesOfCSS/ */
+.fave-glyph {
+  top: 390px;
+  position: absolute;
+  color: #FF4;
+  width: 0px;
+  height: 0px;
+  border-right:  20px solid transparent;
+  border-bottom: 14px  solid #FF4;
+  border-left:   20px solid transparent;
+  transform: rotate(35deg) translateX(-20px);;
+}
+.fave-glyph:before {
+  border-bottom: 16px solid #FF4;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -9px;
+  left: -13px;
+  content: '';
+  transform: rotate(-35deg);
+
+}
+.fave-glyph:after {
+  position: absolute;
+  color: #FF4;
+  top: 1px;
+  left: -21px;
+  width: 0px;
+  height: 0px;
+  border-right: 20px solid transparent;
+  border-bottom: 14px solid #FF4;
+  border-left: 20px solid transparent;
+  transform: rotate(-70deg);
+  content: '';
+}
+
 #lightbox-picture {
-  height: 100%;
+  height: 95%;
   z-index: 1003;
+  float: left;
   -webkit-transition: all 350ms ease;
   -moz-transition: all 350ms ease;
   -o-transition: all 350ms ease;
@@ -32,7 +169,9 @@
 }
 
 #lightbox-sidebar {
-  float: right;
+  float: left;
+  padding-left: 50px;
+  width: 10%;
   color: white;
   z-index:1004;
 }

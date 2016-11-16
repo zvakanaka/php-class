@@ -1,4 +1,4 @@
-.lightbox_bg{
+.lightbox-bg{
   display: none;
   position: fixed;
   top: 0%;
@@ -11,7 +11,7 @@
   opacity:.80;
   filter: alpha(opacity=80);
 }
-.lightbox_fg {
+.lightbox-fg {
   display: none;
   position: fixed;
   top: 2%;
