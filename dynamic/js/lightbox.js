@@ -1,8 +1,14 @@
 var img = '';
+
 function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   img = thumbUrl.substr(thumbUrl.lastIndexOf("/")+1);
-  document.getElementById('lightbox-picture').setAttribute('src', webUrl);
+  var lightPic = document.getElementById('lightbox-picture');
+  lightPic.setAttribute('src', thumbUrl);
+  // lightPic.style.filter = 'blur(0px)';
+  lightPic.setAttribute('src', webUrl);
+
   document.getElementById('lightbox-picture').setAttribute('onError', "this.onerror=null;this.src='img/web-not-found.png';");
+
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
   document.getElementById('download-link').setAttribute('download', img);
 
