@@ -30,18 +30,18 @@
 
 .lightbox-close {
   top: 5px;
-  border-radius: 16px;
-  border-radius: 16px;
   position: absolute;
   width: 50px;
   height: 50px;
   cursor: pointer;
 }
 
-.arrow-glyph {
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-}
+/*.download-glyph {
+  transform: translate(0px, 55px);
+  position: absolute;
+  height: 45px; width: 45px;
+  cursor: pointer;
+}*/
 .arrow-glyph:before, .arrow-glyph::after {
   position: absolute;
   content: '';
@@ -64,7 +64,7 @@
 }
 
 .arrow-glyph.left-glyph:before, .arrow-glyph.left-glyph:after {
-  top: 150px;
+  top: 140px;
 }
 
 .left-glyph:after {
@@ -75,7 +75,7 @@
 }
 
 .arrow-glyph.right-glyph:before, .arrow-glyph.right-glyph:after {
-  top: 215px;
+  top: 205px;
 }
 
 .right-glyph:after {
@@ -86,13 +86,13 @@
 }
 
 .rotate-glyph {
+  top: 285px;
   border-radius: 50%;
   border: 1px solid #FFF;
   border-color:#FFF transparent #FFF #FFF;
   width: 45px;
   height: 45px;
   position: absolute;
-  top: 300px;
   transform: translateX(-20px);
 }
 
@@ -166,6 +166,14 @@
   -moz-transition: all 350ms ease;
   -o-transition: all 350ms ease;
   transition: all 350ms ease;
+}
+
+@media screen and (max-aspect-ratio: 3/2) {
+  #lightbox-picture {
+    width: 100%;
+    height: auto;
+    float: none;
+  }
 }
 
 #lightbox-sidebar {
