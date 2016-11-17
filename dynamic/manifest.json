@@ -3,8 +3,14 @@
   "short_name": "photo-gal",
   "icons": [
     {
-      "src": "../img/launcher.png",
+      "src": "img/launcher_small.png",
       "sizes": "36x36",
+      "type": "image/png",
+      "density": 0.75
+    },
+    {
+      "src": "img/launcher_large.png",
+      "sizes": "144x144",
       "type": "image/png",
       "density": 0.75
     }
