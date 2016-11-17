@@ -3,8 +3,8 @@ var img = '';
 function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   img = thumbUrl.substr(thumbUrl.lastIndexOf("/")+1);
   var lightPic = document.getElementById('lightbox-picture');
-  lightPic.setAttribute('src', thumbUrl);
   // lightPic.style.filter = 'blur(0px)';
+  lightPic.setAttribute('src', thumbUrl);
   lightPic.setAttribute('src', webUrl);
 
   document.getElementById('lightbox-picture').setAttribute('onError', "this.onerror=null;this.src='img/web-not-found.png';");
@@ -14,16 +14,22 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
 
   document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${img}`);
   document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${img}`);
-  var nextPhoto = document.getElementById(`thumb-${img}`).nextElementSibling.id.substr(6);
-  document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${img}&next_photo=${nextPhoto}`);
 
   document.getElementById('favorite').setAttribute('href', `?action=favorite&album_name=${album}&photo_name=${img}`);
 
-  document.getElementById('prev-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').previousElementSibling.click();`);
-  document.getElementById('next-picture').setAttribute('onclick', `document.getElementById('thumb-${img}').nextElementSibling.click();`);
+  document.getElementById('prev-picture').onclick = function() { changePhoto(img, 'prev'); };
+  document.getElementById('next-picture').onclick = function() { changePhoto(img, 'next'); };
 
   document.getElementById('light').style.display = 'block';
   document.getElementById('fade').style.display = 'block';
+  // set up last photo view properly
+  var nextPhotoEl = document.getElementById(`thumb-${img}`).nextElementSibling;
+  var nextPhoto;
+  if (nextPhotoEl === null) { // get previous image if no next image
+    nextPhotoEl = document.getElementById(`thumb-${img}`).previousElementSibling;
+  }
+  nextPhoto = nextPhotoEl.id.substr(6);
+  document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${img}&next_photo=${nextPhoto}`);
 }
 
 // Rotate and align
@@ -42,12 +48,12 @@ document.onkeydown = function(e) {
     e = e || window.event;
     switch(e.which || e.keyCode) {
         case 37: // left
-        document.getElementById(`thumb-${img}`).previousElementSibling.click();
+        changePhoto(img, "prev");
         e.preventDefault();
         break;
 
         case 39: // right
-        document.getElementById(`thumb-${img}`).nextElementSibling.click();
+        changePhoto(img, "next");
         e.preventDefault();
         break;
 
@@ -62,3 +68,15 @@ document.onkeydown = function(e) {
         default: return;
     }
 };
+
+function changePhoto(img, way) {
+  var nextPhoto;
+  if (way == "next") {
+    nextPhoto = document.getElementById(`thumb-${img}`).nextElementSibling;
+  } else {
+    nextPhoto = document.getElementById(`thumb-${img}`).previousElementSibling;
+  }
+  if (nextPhoto !== null) {
+    nextPhoto.click();
+  }
+}
