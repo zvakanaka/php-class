@@ -17,9 +17,10 @@
           <input type="hidden" name="action" value="optimize">
 
           <label>Optimization:</label>
-          <select name="optimization_type">
+          <select name="optimization_type" required>
             <option value="thumbs">Thumbnails</option>
-            <option value="webs" title="Lightbox Sized Previews">Webs</option>
+            <option value="webs">Webs</option>
+            <option value="delete_originals">Delete Originals</option>
           </select>
           <br>
 

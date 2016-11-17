@@ -204,6 +204,9 @@ if ($action == 'register') {
     } else if ($optimization_type == 'webs') {
       $cmd = 'bash scripts/create_webs.sh '.escapeshellarg($album_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
       shell_async($cmd);
+    } else if ($optimization_type == 'delete_originals') {
+      $cmd = 'bash scripts/delete_originals.sh '.escapeshellarg($album_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
+      shell_async($cmd);
     } else {
       $error = "No optimization type specified. Check all fields and try again.";
       include('views/dslr.php');
@@ -213,7 +216,7 @@ if ($action == 'register') {
     include('views/dslr.php');
     die();
   }
-}  else if ($action == 'upload_to_server') {
+} else if ($action == 'upload_to_server') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
     $error = "Imposter! You are not an administrator.";
     include('views/dslr.php');
