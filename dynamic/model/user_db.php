@@ -9,7 +9,6 @@ function login($username, $password) {
   $statement->bindValue(':username', $username);
   $statement->execute();
   while ($row = $statement->fetch()) {
-    error_log($password.' '.$row['password']);
     if (password_verify($password, $row['password'])) {
         return true;
     }
