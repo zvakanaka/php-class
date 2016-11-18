@@ -12,4 +12,4 @@ if [ ! -f $photo_dir/$1/$2 ]; then
   exit 1
 fi
 echo $(date) Deleteing $photo_dir/$1/$2 >> log.txt
-rm $photo_dir/$1/$2 $photo_dir/$1/{.thumb,.web}/$2 $photo_dir/$1/${2%.*}.NEF
+rm $photo_dir/$1/$2 $photo_dir/$1/{.thumb,.web}/${2%.*}.* $photo_dir/$1/${2%.*}.NEF

@@ -3,18 +3,17 @@ if [ -z $1 ]; then
   exit 1;
 fi
 photo_dir='../../photo'
-if [ -d $photo_dir/$1/.thumb ]; then
-  echo "ERROR: $1 thumbs already exist"
-  exit 1;
-fi
 echo $(date) Creating thumbs for $1 from $2 >> log.txt
 
 cd $photo_dir/$1
 if [ $? -eq 0 ]; then
-  mkdir .thumb
+  if [ ! -d .thumb ]; then
+    echo "$1 thumbs does not exist, creating..."
+    mkdir .thumb
+  fi
   if [ $? -eq 0 ]; then
     for f in *.[jJ]*; do
-      convert -resize x120 -strip -interlace Plane -quality 50% $f .thumb/$f;
+      cwebp $f -resize 0 120 -q 50 -o .thumb/${f%.*}.webp;
     done
   else
     echo $(date) Failure creating thumbs: user: $(echo $USER) >> log.txt

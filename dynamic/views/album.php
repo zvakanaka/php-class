@@ -1,14 +1,13 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 
 <main>
-
 <?php foreach ($images as $image) { ?>
-    <a class="thumb-link" id="thumb-<?php echo $image;?>" href="javascript:void(0)"
-        onclick="getAndShow('<?php echo "$photo_dir/$album/.web/$image"; ?>',
-                            '<?php echo "$photo_dir/$album/.thumb/$image"; ?>',
+    <a class="thumb-link" id="thumb-<?php echo strip_ext($image).".webp";?>" href="javascript:void(0)"
+        onclick="getAndShow('<?php echo "$photo_dir/$album/.web/".strip_ext($image).".webp"; ?>',
+                            '<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp"; ?>',
                             '<?php echo "$photo_dir/$album/$image"; ?>',
                             '<?php echo $album; ?>')">
-      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/$image";?>" onError="this.onerror=null;this.src='img/thumb-not-found.png';"/>
+      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp";?>" onError="this.onerror=null;this.src='img/thumb-not-found.png';"/>
     </a>
 <?php } ?>
 
@@ -30,6 +29,12 @@
     <input type="hidden" name="action" value="hide_album" />
     <input type="hidden" name="album_name" value='<?php echo "$album";?>'>
     <input type="submit" name="submit" value="Hide this album">
+  </form>
+<?php } else if (isset($message) && isset($album)) { ?>
+  <form class="" action="." method="post">
+    <input type="hidden" name="action" value="unhide_album" />
+    <input type="hidden" name="album_name" value='<?php echo "$album";?>'>
+    <input type="submit" name="submit" value="Unhide this album">
   </form>
 <?php } ?>
 <?php } ?>

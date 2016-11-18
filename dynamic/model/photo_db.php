@@ -9,23 +9,26 @@ function get_hidden_albums() {
     return $statement;
 }
 
-function hide_album($album_name) {
+function hide_album($album_name, $hidden) {
   global $db;
+
   if (album_exists($album_name)) {
     $query = 'UPDATE hidden_albums SET
-              is_hidden = 1
+              is_hidden = :hidden
               WHERE album_name = :album_name';
     $statement = $db->prepare($query);
     $statement->bindValue(":album_name", $album_name);
+    $statement->bindValue(":hidden", $hidden);
     $statement->execute();
     $statement->closeCursor();
   } else {
     $query = 'INSERT INTO hidden_albums VALUES
               ( NULL
               , :album_name
-              , 1)';
+              , :hidden)';
     $statement = $db->prepare($query);
     $statement->bindValue(":album_name", $album_name);
+    $statement->bindValue(":hidden", $hidden);
     $statement->execute();
     $statement->closeCursor();
   }
@@ -38,12 +41,15 @@ function album_exists($album_name) {
   $statement = $db->prepare($query);
   $statement->bindValue(":album_name", $album_name);
   $statement->execute();
-  $hidden_album = $statement->fetch();
-  $statement->closeCursor();
-  if (sizeof($hidden_album) !== 0) {
-    return false;
+  while ($row = $statement->fetch()) {
+    error_log("HEYEHYEHEYEYEYEY!");
+    $statement->closeCursor();
+    return true;
   }
-  return true;
+  $statement->closeCursor();
+  
+  error_log("This is false HEYEHYEHEYEYEYEY! for ".$album_name);
+  return false;
 }
 
 function get_hidden_images() {

@@ -4,6 +4,7 @@ require('model/photo_db.php');
 require('model/user_db.php');
 require('model/photo_fs.php');
 require('lib/exec.php');
+require('lib/string_tools.php');
 
 session_start();
 
@@ -149,7 +150,11 @@ if ($action == 'register') {
 	die();
 } else if ($action == 'hide_album') {
   $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
-  hide_album($album_name);
+  hide_album($album_name, 1);
+  header("Location: .?action=album&album=$album_name");
+}  else if ($action == 'unhide_album') {
+  $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
+  hide_album($album_name, 0);
   header("Location: .?action=album&album=$album_name");
 } else if ($action == 'dslr') {
   $photo_dir = "../../photo";

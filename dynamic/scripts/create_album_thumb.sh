@@ -8,4 +8,4 @@ if [ ! -d $photo_dir/$1/.album ]; then
   mkdir $photo_dir/$1/.album
 fi
 echo $(date) Creating album thumb for $1: $2 from $3 >> log.txt
-cp $photo_dir/$1/.thumb/$2 $photo_dir/$1/.album/thumb.jpg
+cp $photo_dir/$1/.thumb/${2%.*}.* $photo_dir/$1/.album/thumb.webp
