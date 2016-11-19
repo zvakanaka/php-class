@@ -3,7 +3,7 @@
 <main>
 <?php foreach ($albums as $album) { ?>
     <a class="thumb-link" href="?action=album&amp;album=<?php echo $album;?>">
-      <img class="thumb" src="<?php echo "$photo_dir/$album/.album/thumb.webp"; ?>" onError="this.onerror=null;this.src='img/album-not-found.png';"/>
+      <img class="thumb" src="<?php echo "$photo_dir/$album/.album/thumb.webp"; ?>" alt="Album thumb for <?php echo $album;?>" onError="this.onerror=null;this.src='img/album-not-found.png';"/>
     </a>
 <?php } ?>
 </main>

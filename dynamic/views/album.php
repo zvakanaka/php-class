@@ -1,13 +1,14 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 
 <main>
+  <h1><?php echo ucfirst($album);?></h1>
 <?php foreach ($images as $image) { ?>
     <a class="thumb-link" id="thumb-<?php echo strip_ext($image).".webp";?>" href="javascript:void(0)"
         onclick="getAndShow('<?php echo "$photo_dir/$album/.web/".strip_ext($image).".webp"; ?>',
                             '<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp"; ?>',
                             '<?php echo "$photo_dir/$album/$image"; ?>',
                             '<?php echo $album; ?>')">
-      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp";?>" onError="this.onerror=null;this.src='img/thumb-not-found.png';"/>
+      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp";?>" alt="<?php echo "Thumbnail of ".$image;?>" onError="this.onerror=null;this.src='img/thumb-not-found.png';"/>
     </a>
 <?php } ?>
 
