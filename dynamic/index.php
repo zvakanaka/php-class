@@ -131,6 +131,7 @@ if ($action == 'register') {
   if (login($username, $password)) {
     $_SESSION["logged_in"] = $username;
     $user_id = get_user_id($username);
+    $_SESSION["user_id"] = $user_id;
     if (is_admin($user_id)) {
       $_SESSION["is_admin"] = true;
     }
@@ -339,8 +340,8 @@ if ($action == 'register') {
   if ($user_id == NULL || $user_id == FALSE) {
     echo "Error: No user id provided";
     header("Refresh:2; url=.?action=users", true, 303);
-  } else if (!isset($_SESSION['is_admin'])) {
-    echo "Imposter! You are not an admin.";
+  } else if ($user_id != $_SESSION['user_id'] && !isset($_SESSION['is_admin'])) {
+    echo "Imposter! You are not an admin and your user id is not ".$user_id.".";
     header("Refresh:2; url=.?action=home", true, 303);
   } else {
     $faves = get_favorites($user_id);

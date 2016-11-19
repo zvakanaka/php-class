@@ -10,7 +10,7 @@
         </tr>
         <?php foreach ($faves as $fave) : ?>
             <tr>
-              <td> <img src=<?php echo "'../../photo/".$fave['album_name']."/.thumb/".$fave['photo_name']."'";?> /></td>
+              <td> <img src=<?php echo "'../../photo/".$fave['album_name']."/.thumb/".strip_ext($fave['photo_name']).".webp'";?> alt="Favorite image: <?php echo $fave['photo_name']." from the album: ".$fave['album_name'];?>" /></td>
               <td><?php echo "'".$fave['album_name']."/".$fave['photo_name']."'";?></td>
               <td>
                 <?php if ($fave['request_hidden']) {?>
@@ -29,10 +29,12 @@
     </table>
 </main>
 <section>
+  <h1>Zip Favorites</h1>
   <a href="?action=zip_favorites&user_id=<?php echo $user_id;?>">Create Zip</a>
 </section>
 <?php if (filter_input(INPUT_GET, 'zip') != NULL) { ?>
 <section>
+  <h1>Download Favorites</h1>
   <p>You may download <a href="../../zips/<?php echo filter_input(INPUT_GET, 'zip');?>"><?php echo filter_input(INPUT_GET, 'zip');?></a> when it is ready.</p>
 </section>
 <?php } ?>

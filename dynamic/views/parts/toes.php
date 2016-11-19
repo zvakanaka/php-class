@@ -4,22 +4,22 @@
 
   <span id="timestampy"><?php echo 'Last updated: <time datetime="'. date('c') . '">' . date('F j, Y', getlastmod()) . '</time>'; ?></span>
 
-  <noscript id="deferred-styles">
+  <noscript id="deferred-styles2">
     <link rel="stylesheet" type="text/css" href="/php-class/dynamic/styles/main.css"/>
   </noscript>
   <script>
     //this is what google pageload recommends so I copied this:
-    var loadDeferredStyles = function() {
-      var addStylesNode = document.getElementById("deferred-styles");
+    var loadDeferredStyles2 = function() {
+      var addStylesNode2 = document.getElementById("deferred-styles2");
       var replacement = document.createElement("div");
-      replacement.innerHTML = addStylesNode.textContent;
+      replacement.innerHTML = addStylesNode2.textContent;
       document.body.appendChild(replacement)
-      addStylesNode.parentElement.removeChild(addStylesNode);
+      addStylesNode2.parentElement.removeChild(addStylesNode2);
     };
     var raf = requestAnimationFrame || mozRequestAnimationFrame ||
         webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-    else window.addEventListener('load', loadDeferredStyles);
+    if (raf) raf(function() { window.setTimeout(loadDeferredStyles2, 0); });
+    else window.addEventListener('load', loadDeferredStyles2);
   </script>
 </footer>
 
