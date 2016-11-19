@@ -3,7 +3,7 @@
   "short_name": "<?php echo $album;?>",
   "icons": [
     {
-      "src": "/photo/<?php echo $album;?>/.img/icon.webp",
+      "src": "/photo/<?php echo $album;?>/.thumb/icon.webp",
       "sizes": "120x120",
       "type": "image/webp"
     }
