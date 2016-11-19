@@ -2,6 +2,7 @@ var img = '';
 
 function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   img = thumbUrl.substr(thumbUrl.lastIndexOf("/")+1);
+  fullsizeEnd = fullsizeUrl.substr(fullsizeUrl.lastIndexOf("/")+1);
   var lightPic = document.getElementById('lightbox-picture');
   // lightPic.style.filter = 'blur(0px)';
   lightPic.setAttribute('src', thumbUrl);
@@ -12,7 +13,7 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
   document.getElementById('download-link').setAttribute('download', img);
 
-  document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${img}`);
+  document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${fullsizeEnd}`);
   document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${img}`);
 
   document.getElementById('favorite').setAttribute('href', `?action=favorite&album_name=${album}&photo_name=${img}`);

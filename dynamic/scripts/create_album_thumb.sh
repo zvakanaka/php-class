@@ -9,3 +9,4 @@ if [ ! -d $photo_dir/$1/.album ]; then
 fi
 echo $(date) Creating album thumb for $1: $2 from $3 >> log.txt
 cp $photo_dir/$1/.thumb/${2%.*}.webp $photo_dir/$1/.album/thumb.webp
+cwebp $photo_dir/$1/.album/thumb.webp -crop 45 0 120 120 -o $photo_dir/$1/.img/icon.webp
