@@ -10,13 +10,13 @@
 
 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
   if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
-    <section>
+    <div class="singularity">
       <a href="?action=home&hidden=true">Show Hidden Albums</a>
-    </section>
+    </div>
 <?php } else { ?>
-  <section>
+  <div class="singularity">
     <a href="?action=home">Hide Hidden Albums</a>
-  </section>
+  </div>
 <?php }} ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>

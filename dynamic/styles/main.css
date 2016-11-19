@@ -14,7 +14,7 @@ header {
   padding-top: 10px;
   background-color: #000;
   margin-bottom: 20px;
-  box-shadow: 1px 3px 8px rgba(0,0,0,0.5);
+  box-shadow: 0px 3px 7px rgba(0,0,0,0.5);
 }
 
 .nav-a, .logo {
@@ -41,15 +41,12 @@ h1,h2,h3,h4,h5,h6 {
 form {
   padding: 20px 20px;
   box-shadow: 1px 3px 8px rgba(0,0,0,0.5);
-  background-color: #bbccbb;
+  background-color: #ccc;
 }
 
-main, section {
+main, .singularity {
   margin-left: 10px;
   margin-right: 10px;
-}
-section {
-  margin-top: 10px;
 }
 
 input {
@@ -60,10 +57,15 @@ footer {
   margin-top: 20px;
 }
 
-footer a:link { color:#d0d0d0; }
-footer a:visited { color:#c0c0c0; }
-footer a:hover { color:#ffffff; }
-footer a:active { color:#f0f0f0; }
+.singularity {
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+a:link:not(.nav-a) { color:#d0d0d0; }
+a:visited:not(.nav-a) { color:#c0c0c0; }
+a:hover:not(.nav-a) { color:#ffffff; }
+a:active:not(.nav-a) { color:#f0f0f0; }
 
 footer a {
   padding-left: 10px;
@@ -97,7 +99,7 @@ img.thumb {
 }
 
 @media screen and (max-aspect-ratio: 3/2) {
-  main, section {
+  main, .singularity {
     margin-left: 0px;
     margin-right: 0px;
   }

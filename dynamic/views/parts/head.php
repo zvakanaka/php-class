@@ -14,7 +14,7 @@
     <?php } ?>
   </head>
   <body>
-    <header role="navigation">
+    <header>
       <a class="logo" href="/php-class/assignments.php">PHP CLASS</a>
       <?php
       $menu = array("Albums" => "home");
@@ -40,17 +40,17 @@
       }
       ?>
     </header>
-    <section>
+    <div class="singularity">
       <?php if (isset($error)) { ?>
         <p class="error">
           <?php echo $error; ?>
         </p>
       <?php } ?>
-    </section>
-    <section>
+    </div>
+    <div class="singularity">
     <?php if (isset($message)) { ?>
       <p class="message">
         <?php echo $message; ?>
       </p>
     <?php } ?>
-  </section>
+  </div>

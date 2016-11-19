@@ -5,15 +5,15 @@
         <input type="hidden" name="action" value="authenticate">
 
         <label>Username:</label>
-        <input type="text" name="username"<?php if(isset($username)) echo " value='$username'";?>/>
+        <input required type="text" name="username"<?php if(isset($username)) echo " value='$username'";?>/>
         <br>
 
         <label>Password:</label>
-        <input type="password" name="password"<?php if(isset($password)) echo " value='$password'";?>/>
+        <input required type="password" name="password"<?php if(isset($password)) echo " value='$password'";?>/>
         <br>
 
         <label>&nbsp;</label>
-        <input type="submit" value="Login" />
+        <input required type="submit" value="Login" />
         <br>
     </form>
     <h1>Register</h1>
@@ -21,26 +21,26 @@
         <input type="hidden" name="action" value="insert_user">
 
         <label>First Name:</label>
-        <input type="text" name="firstname"<?php if(isset($firstname)) echo " value='$firstname'";?>/>
+        <input required type="text" name="firstname"<?php if(isset($firstname)) echo " value='$firstname'";?>/>
         <br>
 
         <label>Last Name:</label>
-        <input type="text" name="lastname"<?php if(isset($lastname)) echo " value='$lastname'";?>/>
+        <input required type="text" name="lastname"<?php if(isset($lastname)) echo " value='$lastname'";?>/>
         <br>
 
         <label>Username:</label>
-        <input type="text" name="new-username"<?php if(isset($username)) echo " value='$username'";?>/>
+        <input required type="text" name="new-username"<?php if(isset($username)) echo " value='$username'";?>/>
         <br>
 
         <label>Password:</label>
-        <input type="password" name="new-password"/>
+        <input required type="password" name="new-password"/>
         <br>
         <label>Confirm Password:</label>
-        <input type="password" name="confirm-new-password"/>
+        <input required type="password" name="confirm-new-password"/>
         <br>
 
         <label>Email:</label>
-        <input type="email" name="email"<?php if(isset($email)) echo " value='$email'";?>/>
+        <input required type="email" name="email"<?php if(isset($email)) echo " value='$email'";?>/>
         <br>
 
         <label>&nbsp;</label>
