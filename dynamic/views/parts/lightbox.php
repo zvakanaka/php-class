@@ -1,6 +1,6 @@
 <!-- lightbox -->
 <div id="light" class="lightbox-fg line">
-  <img id="lightbox-picture" alt="Lightbox Web Preview" src="img/loading-lightbox.png" onError="this.onerror=null;this.src='img/web-not-found.png';"/>
+  <img id="lightbox-picture" alt="Lightbox Web Preview" src="img/loading-lightbox.png"/>
   <div id="lightbox-sidebar">
     <a id="close-lightbox" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" class="lightbox-close"></a>
     <br><a class="arrow-glyph download-glyph" id="download-link"></a>

@@ -8,7 +8,7 @@
                             '<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp"; ?>',
                             '<?php echo "$photo_dir/$album/$image"; ?>',
                             '<?php echo $album; ?>')">
-      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp";?>" alt="<?php echo "Thumbnail of ".$image;?>" onError="this.onerror=null;this.src='img/thumb-not-found.png';"/>
+      <img class="thumb" src="<?php echo "$photo_dir/$album/.thumb/".strip_ext($image).".webp";?>" alt="<?php echo "Thumbnail of ".$image;?>"/>
     </a>
 <?php } ?>
 

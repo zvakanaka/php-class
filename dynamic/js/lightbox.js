@@ -8,7 +8,7 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   lightPic.setAttribute('src', thumbUrl);
   lightPic.setAttribute('src', webUrl);
 
-  document.getElementById('lightbox-picture').setAttribute('onError', "this.onerror=null;this.src='img/web-not-found.png';");
+  document.getElementById('lightbox-picture').setAttribute('onError', `this.onerror=null;this.src='${fullsizeUrl}';`);
 
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
   document.getElementById('download-link').setAttribute('download', img);
