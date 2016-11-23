@@ -3,6 +3,8 @@ body {
   background-color: #3c3c3c;
   margin: 0;
   padding: 0;
+  position: relative;
+  min-height: 100vh;
 }
 
 header, footer {
@@ -54,7 +56,8 @@ input {
 }
 
 footer {
-  margin-top: 20px;
+  position: absolute;
+  bottom: 0;
 }
 
 .singularity {
@@ -96,6 +99,10 @@ img.thumb {
 
 .hidden {
   display: none;
+}
+
+main {
+ padding-bottom: 35px;
 }
 
 @media screen and (max-aspect-ratio: 3/2) {
