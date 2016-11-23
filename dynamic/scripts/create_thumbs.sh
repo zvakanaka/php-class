@@ -13,7 +13,7 @@ if [ $? -eq 0 ]; then
   fi
   if [ $? -eq 0 ]; then
     for f in *.[jJ]*; do
-      cwebp $f -resize 0 120 -q 50 -o .thumb/${f%.*}.webp;
+      cwebp $f -resize 0 120 -q 50 -short -o .thumb/${f%.*}.webp;
     done
   else
     echo $(date) Failure creating thumbs: user: $(echo $USER) >> log.txt
