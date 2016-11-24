@@ -36,12 +36,6 @@
   cursor: pointer;
 }
 
-/*.download-glyph {
-  transform: translate(0px, 55px);
-  position: absolute;
-  height: 45px; width: 45px;
-  cursor: pointer;
-}*/
 .arrow-glyph:before, .arrow-glyph::after {
   position: absolute;
   content: '';
@@ -158,7 +152,7 @@
   overflow: hidden;
 }
 
-/* From https://css-tricks.com/examples/ShapesOfCSS/ */
+/* Star from https://css-tricks.com/examples/ShapesOfCSS/ */
 .fave-glyph {
   top: 360px;
   position: absolute;
