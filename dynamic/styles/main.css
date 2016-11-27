@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6, pre {
 	padding-left: 10px;
 	box-shadow: inset #333 0px 0px 8px;
 	color: rgb(135, 241, 135);
-	background-color: #224455;
+	background-color: #2D2D2D;
 }
 
 form, article {
@@ -56,11 +56,6 @@ pre {
 	background-color: #224455;
 	padding: 5px;
 
-}
-
-code {
-	color: #0DB;
-	background-color: #245;
 }
 
 pre {
@@ -89,10 +84,27 @@ footer {
     margin-top: 10px;
 }
 
+table {
+				    border-collapse: collapse;
+}
+
+table, td, th {
+  border: 1px solid gray;
+  background-color: #ccc;
+}
+
 a:link:not(.nav-a) { color:#d0d0d0; }
-a:visited:not(.nav-a) { color:#c0c0c0; }
-a:hover:not(.nav-a) { color:#ffffff; }
-a:active:not(.nav-a) { color:#f0f0f0; }
+a:visited:not(.nav-a) { 
+	color: #696969;
+  text-shadow: #171717 3px 3px 6px;
+}
+a:hover:not(.nav-a) { 
+  color: #ffffff;
+  text-shadow: #000000 0px 0px 4px; 
+}
+a:active:not(.nav-a) { 
+  color:#f0f0f0; 
+}
 
 footer a {
   padding-left: 10px;
