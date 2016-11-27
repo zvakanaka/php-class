@@ -29,15 +29,18 @@ nav {
 }
 
 nav a.on, nav a:hover {
-    background-color: #71ce71;
-    color: #000;
-    border-radius: 0px;
+  background-color: #71ce71;
+  color: #000;
+  border-radius: 0px;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  padding-left: 10px;
-  -webkit-margin-after: .2em;
- color: rgb(135, 241, 135);
+h1, h2, h3, h4, h5, h6, pre {
+  padding: 4px;
+	border-radius: 6px;
+	padding-left: 10px;
+	box-shadow: inset #333 0px 0px 8px;
+	color: rgb(135, 241, 135);
+	background-color: #224455;
 }
 
 form, article {
@@ -46,11 +49,13 @@ form, article {
   background-color: #ccc;
 }
 
-code, pre {
-				border-radius: 5px;
-				-moz-border-radius: 5px;
-				-webkit-border-radius: 5px;
-				margin: 1em 0;
+pre {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: #224455;
+	padding: 5px;
+
 }
 
 code {
