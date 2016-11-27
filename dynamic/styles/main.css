@@ -40,10 +40,29 @@ h1,h2,h3,h4,h5,h6 {
  color: rgb(135, 241, 135);
 }
 
-form {
+form, article {
   padding: 20px 20px;
   box-shadow: 1px 3px 8px rgba(0,0,0,0.5);
   background-color: #ccc;
+}
+
+code, pre {
+				border-radius: 5px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				margin: 1em 0;
+}
+
+code {
+	color: #0DB;
+	background-color: #245;
+}
+
+pre {
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
 }
 
 main, .singularity {
