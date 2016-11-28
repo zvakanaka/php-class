@@ -12,6 +12,7 @@
     <?php } else { ?>
       <link rel="manifest" href="/php-class/dynamic/manifest_json/default.json">
     <?php } ?>
+    <!-- The following script is a polyfill for webp. I did not write it -->
     <script>(function(){var WebP=new Image();WebP.onload=WebP.onerror=function(){
 if(WebP.height!=2){var sc=document.createElement('script');sc.type='text/javascript';sc.async=true;
 var s=document.getElementsByTagName('script')[0];sc.src='js/webpjs-0.0.2.min.js';s.parentNode.insertBefore(sc,s);}};

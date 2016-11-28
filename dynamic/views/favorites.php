@@ -28,7 +28,7 @@
         <?php endforeach; ?>
     </table>
 </main>
-<div class="singularity>
+<div class="singularity">
   <h1>Zip Favorites</h1>
   <a href="?action=zip_favorites&user_id=<?php echo $user_id;?>">Create Zip</a>
 </div>

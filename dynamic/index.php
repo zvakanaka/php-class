@@ -12,7 +12,7 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
   $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
   if ($action == NULL) {
-    $action = 'register';
+    $action = 'home';
   }
 }
 
@@ -67,9 +67,10 @@ if ($action == 'register') {
     include('views/login-register.php');
     die();
   } else {
-    if (insert_user($firstname, $lastname, $username, $password, $email) == true) {
+    if (insert_user($firstname, $lastname, $username, $password, $email) == TRUE) {
       $_SESSION["logged_in"] = $username;
       $user_id = get_user_id($username);
+      $_SESSION["user_id"] = $user_id;
       if (is_admin($user_id)) {
         $_SESSION["is_admin"] = true;
       }
@@ -146,7 +147,7 @@ if ($action == 'register') {
   session_destroy();
   session_write_close();
   setcookie(session_name(),'',0,'/');
-  echo "Logged out, redirecting in a second...";
+  echo "Logged out, just a sec...";
 	header( "Refresh:1; url=.?action=home", true, 303);
 	die();
 } else if ($action == 'hide_album') {
