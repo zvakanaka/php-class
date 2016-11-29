@@ -36,7 +36,7 @@ nav a.on, nav a:hover {
 
 h1, h2, h3, h4, h5, h6, pre {
   padding: 4px;
-border-radius: 6px;
+	border-radius: 6px;
 	padding-left: 10px;
 	box-shadow: inset #333 0px 0px 8px;
 	color: rgb(135, 241, 135);
@@ -73,12 +73,12 @@ footer {
 }
 
 .singularity {
-    padding-left: 10px;
-    margin-top: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
 }
 
 table {
-				    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 table, td, th {
@@ -87,12 +87,12 @@ table, td, th {
 }
 
 a:link:not(.nav-a) { 
-  color:#d0d0d0;
-  text-shadow: #171717 3px 3px 4px;
+  color:#fff;
+  text-shadow: #000 0px 0px 4px;
 }
 a:visited:not(.nav-a) { 
-  color: #222;
-  text-shadow: #171717 3px 3px 4px;
+  color: #fff;
+  text-shadow: #000 0px 0px 4px;
 }
 a:hover:not(.nav-a) { 
   color: #ffffff;
@@ -105,7 +105,6 @@ a:active:not(.nav-a) {
 
 footer a {
   padding-left: 10px;
-
 }
 
 img.thumb {
