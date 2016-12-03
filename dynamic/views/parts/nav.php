@@ -1,6 +1,6 @@
 <nav>
     <?php $action = (isset($action)) ? $action : filter_input(INPUT_GET, 'action'); ?>
-      <a class="logo" href="/php-class/assignments.php">PHP CLASS</a>
+      <a class="logo" href="http://howtoterminal.com">howtoterminal<span class="blue">$</span><span class="lime">&gt</span><span class="blink">_</span></a>
       <?php
       $menu = array("Albums" => "home");
 

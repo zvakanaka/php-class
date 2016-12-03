@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <?php $action = (isset($action)) ? $action : filter_input(INPUT_GET, 'action'); ?>
-    <title> <?php echo ucfirst($action); ?> | PHP Class</title>
+    <title> <?php echo ucfirst($action); ?> | howtoterminal</title>
     <meta name="description" content="PHP Class Dynamic Project">
     <meta name="keywords" content="php, programming, byui, photography">
     <meta name="author" content="Adam Quinton">

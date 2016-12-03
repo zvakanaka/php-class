@@ -14,7 +14,7 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   document.getElementById('download-link').setAttribute('download', img);
 
   document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${fullsizeEnd}`);
-  document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${img}`);
+  document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${fullsizeEnd}`);
 
   document.getElementById('favorite').setAttribute('href', `?action=favorite&album_name=${album}&photo_name=${img}`);
 
@@ -30,7 +30,7 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
     nextPhotoEl = document.getElementById(`thumb-${img}`).previousElementSibling;
   }
   nextPhoto = nextPhotoEl.id.substr(6);
-  document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${img}&next_photo=${nextPhoto}`);
+  document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${fullsizeEnd}&next_photo=${nextPhoto}`);
 }
 
 // Rotate and align

@@ -86,21 +86,21 @@ table, td, th {
   background-color: #ccc;
 }
 
-a:link:not(.nav-a) { 
+a:link:not(.nav-a) {
   color:#fff;
   text-shadow: #000 0px 0px 4px;
 }
-a:visited:not(.nav-a) { 
+a:visited:not(.nav-a) {
   color: #fff;
   text-shadow: #000 0px 0px 4px;
 }
-a:hover:not(.nav-a) { 
+a:hover:not(.nav-a) {
   color: #ffffff;
-  text-shadow: #000000 0px 0px 4px; 
+  text-shadow: #000000 0px 0px 4px;
 }
-a:active:not(.nav-a) { 
-  text-shadow: #eee 0px 0px 4px; 
-  color:#000; 
+a:active:not(.nav-a) {
+  text-shadow: #eee 0px 0px 4px;
+  color:#000;
 }
 
 footer a {
@@ -135,6 +135,16 @@ img.thumb {
 
 main {
  padding-bottom: 35px;
+}
+
+.logo { color: lime; }
+.blue { color: #03A; }
+.lime { color: lime; }
+.blink {
+  animation: blinky 1s linear infinite;
+}
+@keyframes blinky {
+  50% { opacity: 0; }
 }
 
 @media screen and (max-aspect-ratio: 3/2) {
