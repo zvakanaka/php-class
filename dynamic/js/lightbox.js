@@ -11,7 +11,7 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   document.getElementById('lightbox-picture').setAttribute('onError', `this.onerror=null;this.src='${fullsizeUrl}';`);
 
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
-  document.getElementById('download-link').setAttribute('download', img);
+  document.getElementById('download-link').setAttribute('download', fullsizeUrl);
 
   document.getElementById('set-as-album-thumb').setAttribute('href', `?action=set_album_thumb&album_name=${album}&photo_name=${fullsizeEnd}`);
   document.getElementById('move-to-trash').setAttribute('href', `?action=move_to_trash&album_name=${album}&photo_name=${fullsizeEnd}`);
