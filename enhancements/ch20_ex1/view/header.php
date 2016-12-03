@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>    
+<html>
 <!-- the head section -->
 <head>
     <title>My Guitar Shop</title>
@@ -13,4 +13,3 @@
     <h1>My Guitar Shop</h1>
 </header>
 <main>
-            

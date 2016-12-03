@@ -1,7 +1,12 @@
 -- create and select the database
--- DROP DATABASE IF EXISTS my_guitar_shop2;
--- CREATE DATABASE my_guitar_shop2;
--- USE my_guitar_shop2;
+DROP DATABASE IF EXISTS my_guitar_shop2;
+CREATE DATABASE my_guitar_shop2;
+USE my_guitar_shop2;
+-- hey, wanna know my password
+CREATE USER 'guitar'@'localhost' IDENTIFIED BY 'hundred';
+-- allow some CRUD to happen
+GRANT SELECT, DELETE, INSERT, UPDATE ON my_guitar_shop2.* TO 'guitar'@'localhost';
+FLUSH PRIVILEGES;
 
 -- create the tables for the database
 DROP TABLE IF EXISTS customers;
@@ -12,7 +17,7 @@ CREATE TABLE customers (
   firstName         VARCHAR(60)    NOT NULL,
   lastName          VARCHAR(60)    NOT NULL,
   shipAddressID     INT                       DEFAULT NULL,
-  billingAddressID  INT                       DEFAULT NULL,  
+  billingAddressID  INT                       DEFAULT NULL,
   PRIMARY KEY (customerID),
   UNIQUE INDEX emailAddress (emailAddress)
 );
@@ -45,7 +50,7 @@ CREATE TABLE orders (
   cardNumber        CHAR(16)       NOT NULL,
   cardExpires       CHAR(7)        NOT NULL,
   billingAddressID  INT            NOT NULL,
-  PRIMARY KEY (orderID), 
+  PRIMARY KEY (orderID),
   INDEX customerID (customerID)
 );
 
@@ -57,8 +62,8 @@ CREATE TABLE orderItems (
   itemPrice         DECIMAL(10,2)  NOT NULL,
   discountAmount    DECIMAL(10,2)  NOT NULL,
   quantity          INT NOT NULL,
-  PRIMARY KEY (itemID), 
-  INDEX orderID (orderID), 
+  PRIMARY KEY (itemID),
+  INDEX orderID (orderID),
   INDEX productID (productID)
 );
 
@@ -72,8 +77,8 @@ CREATE TABLE products (
   listPrice         DECIMAL(10,2)  NOT NULL,
   discountPercent   DECIMAL(10,2)  NOT NULL   DEFAULT 0.00,
   dateAdded         DATETIME       NOT NULL,
-  PRIMARY KEY (productID), 
-  INDEX categoryID (categoryID), 
+  PRIMARY KEY (productID),
+  INDEX categoryID (categoryID),
   UNIQUE INDEX productCode (productCode)
 );
 

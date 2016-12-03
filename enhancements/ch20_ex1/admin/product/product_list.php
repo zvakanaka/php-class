@@ -22,7 +22,9 @@
 
     <h2>Links</h2>
     <p class="last_paragraph">
-        <a href="index.php?action=show_add_edit_form">Add Product</a>
+      <a href="index.php?action=list_categories">Category List</a>
+      <br>
+      <a href="index.php?action=show_add_edit_form">Add Product</a>
     </p>
 </section>
 <?php include '../../view/footer.php'; ?>
