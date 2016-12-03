@@ -12,7 +12,7 @@
     <dd><a href="enhancements/ch08_ex2">Exercise 8-2 (Completed)</a></dd>
     <dd><a href="enhancements/ch15_ex1">Exercise 15-1 (Completed)</a></dd>
     <dd><a href="enhancements/ch12_ex2">Exercise 12-2 (Completed)</a></dd>
-    <dd><a href="enhancements/ch20_ex1">Exercise 20-1 (Not Completed)</a></dd>
+    <dd><a href="enhancements/ch20_ex1">Exercise 20-1 (Completed)</a></dd>
     <dd>Exercise 13-1 (Not Completed)</dd>
   </dl>
   <dl>

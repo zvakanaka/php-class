@@ -29,6 +29,33 @@ switch ($action) {
           $categories = get_categories();
           include('category_list.php');
           break;
+    case 'delete_category':
+        $category_id = filter_input(INPUT_POST, 'category_id',
+              FILTER_VALIDATE_INT);
+        if ($category_id == NULL || $category_id == FALSE) {
+            $error = "Missing or incorrect category id.";
+            include('../../errors/error.php');
+            die();
+        }
+        if (num_products($category_id) < 1) {
+          delete_category($category_id);
+        } else {
+          $error = "This category can't be deleted because it contains products.";
+          include('../../errors/error.php');
+          die();
+        }
+        header("Location: .?action=list_categories");
+        break;
+    case 'add_category':
+      $name = filter_input(INPUT_POST, 'name');
+      if ($name == NULL) {
+          $error = "Invalid category data. Check field and try again.";
+          include('../errors/error.php');
+      } else {
+          add_category($name);
+          header("Location: .?action=list_categories");
+      }
+      break;
     case 'view_product':
         $categories = get_categories();
         $product_id = filter_input(INPUT_GET, 'product_id',
