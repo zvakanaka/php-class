@@ -1,6 +1,6 @@
 <nav>
     <?php $action = (isset($action)) ? $action : filter_input(INPUT_GET, 'action'); ?>
-      <a class="logo" href="http://howtoterminal.com">howtoterminal<span class="blue">$</span><span class="lime">&gt</span><span class="blink">_</span></a>
+      <a class="logo" href="/">howtoterminal<span class="blue">$</span><span class="lime">&gt</span><span class="blink">_</span></a>
       <?php
       $menu = array("Albums" => "home");
 
@@ -14,13 +14,14 @@
       } else {
         $menu["Login"] = "register";
       }
-
-      foreach(array_keys($menu) as $key){
-        echo '<a class="nav-a';
-        if ( ''.$action == strip_extra_params($menu[$key]))
-         echo " on";
-         $root = '/php-class/dynamic';
-         echo '" href="'.$root."/?action=".$menu[$key].'" id="'.$menu[$key].'_tab">'.$key.'</a>';
-      }
       ?>
+        <?php
+        foreach(array_keys($menu) as $key){
+          echo '<a class="nav-link nav-a';
+          if ( ''.$action == strip_extra_params($menu[$key]))
+           echo " on";
+           $root = '/php-class/dynamic';
+           echo '" href="'.$root."/?action=".$menu[$key].'" id="'.$menu[$key].'_tab">'.$key.'</a>';
+        }
+        ?>
 </nav>
