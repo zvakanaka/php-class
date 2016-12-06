@@ -1,3 +1,4 @@
+const params = new URLSearchParams(location.search);
 var img = '';
 
 function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
@@ -9,6 +10,8 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   lightPic.setAttribute('src', webUrl);
 
   document.getElementById('lightbox-picture').setAttribute('onError', `this.onerror=null;this.src='${fullsizeUrl}';`);
+  params.set('photo', img);
+  window.history.replaceState({}, '', `${location.pathname}?${params}`);
 
   document.getElementById('download-link').setAttribute('href', fullsizeUrl);
   document.getElementById('download-link').setAttribute('download', fullsizeUrl);
@@ -31,6 +34,14 @@ function getAndShow(webUrl, thumbUrl, fullsizeUrl, album) {
   }
   nextPhoto = nextPhotoEl.id.substr(6);
   document.getElementById('delete-photo').setAttribute('href', `?action=delete_photo&album_name=${album}&photo_name=${fullsizeEnd}&next_photo=${nextPhoto}`);
+}
+
+var lightboxClose = document.querySelector('#close-lightbox');
+lightboxClose.onclick = function clickLightboxClose () {
+   document.getElementById('light').style.display='none';
+   document.getElementById('fade').style.display='none';
+   params.delete('photo');
+   window.history.replaceState({}, '', `${location.pathname}?${params}`);
 }
 
 // Rotate and align

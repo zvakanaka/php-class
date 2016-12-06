@@ -34,4 +34,7 @@ Run the setup and create scripts from MySQL:
 `source dynamic/model/setup.sql` and `source dynamic/model/photo-gal.sql`
 
 ## Photos
-Place photos in a sibling directory (can be symbolic link) of the project. Ensure `www-data` has rights to read and write contents.
+Place photos in a sibling directory (can be symbolic link) of the project named `photo`. Ensure `www-data` has rights to read and write contents.
+
+## Zips
+Make a directory named `zips` that is also a sibling directory to the project. Ensure `www-data` has rights to read and write contents.

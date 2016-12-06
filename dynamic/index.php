@@ -162,14 +162,14 @@ if ($action == 'register') {
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
   include('views/dslr.php');
 } else if ($action == 'download_from_dslr') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -189,7 +189,7 @@ if ($action == 'register') {
   die();
 } else if ($action == 'optimize') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -225,7 +225,7 @@ if ($action == 'register') {
   }
 } else if ($action == 'upload_to_server') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -251,7 +251,7 @@ if ($action == 'register') {
   }
 } else if ($action == 'set_album_thumb') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -275,7 +275,7 @@ if ($action == 'register') {
   }
 } else if ($action == 'move_to_trash') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -300,7 +300,7 @@ if ($action == 'register') {
   }
 } else if ($action == 'delete_photo') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -351,7 +351,7 @@ if ($action == 'register') {
   }
 } else if ($action == 'zip_favorites') {
   if (!isset($_SESSION["is_admin"])) {// authenticate
-    $error = "Imposter! You are not an administrator.";
+    $error = "Sorry, only administrators can do these things.";
     include('views/dslr.php');
     die();
   }
@@ -364,7 +364,7 @@ if ($action == 'register') {
     // the zip will be updated
     $cmd = "zip -j ../../zips/user_$user_id.zip ";
     foreach ($faves as $fave) {
-      $cmd .= "../../photo/".$fave['album_name']."/".$fave['photo_name']." ";
+      $cmd .= "../../photo/".$fave['album_name']."/".strip_ext($fave['photo_name']).".* ";
     }
     $cmd .= "";
     shell_async($cmd);
