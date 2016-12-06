@@ -70,11 +70,14 @@ input {
 footer {
   position: absolute;
   bottom: 0;
+  line-height: 1.5em;
+  color: lightgray;
 }
 
 .singularity {
   padding-left: 10px;
   margin-top: 10px;
+  color: floralwhite;
 }
 
 table {
@@ -82,8 +85,9 @@ table {
 }
 
 table, td, th {
-  border: 1px solid gray;
-  background-color: #ccc;
+  border: 1px solid #008a7d;
+  background-color: #000;
+  color: floralwhite;
 }
 
 a:link:not(.nav-a) {
