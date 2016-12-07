@@ -313,13 +313,18 @@ if ($action == 'register') {
 
   if ($album_name == NULL || $album_name == FALSE ||
       $photo_name == NULL || $photo_name == FALSE) {
-    echo "Error: Could not delete $album_name/$photo_name.";
+    echo "Error: Could not delete $album_name/$photo_name, missing information.";
     header("Refresh:2; url=.?action=album&album=$album_name", true, 303);
   } else {
     $cmd = 'bash scripts/delete_photo.sh '.escapeshellarg($album_name).' '.escapeshellarg($photo_name).' '.escapeshellarg($_SERVER['REMOTE_ADDR']);
     shell_async($cmd);
     echo $album_name."/".$photo_name." deleted.";
-    header("Refresh:1; url=.?action=album&album=$album_name&photo=$next_photo", true, 303);
+    if ($next_photo == NULL || $next_photo == FALSE) {
+      $referer = $_SERVER['HTTP_REFERER'];
+      header("Refresh:1; url=$referer", true, 303);
+    } else {
+      header("Refresh:1; url=.?action=album&album=$album_name&photo=$next_photo", true, 303);
+    }
   }
 } else if ($action == 'favorite') {
   $album_name = filter_input(INPUT_GET, 'album_name', FILTER_SANITIZE_STRING);
@@ -335,6 +340,25 @@ if ($action == 'register') {
     echo $album_name."/".$photo_name." favorited.";
     header("Refresh:1; url=.?action=album&album=$album_name&photo=$photo_name", true, 303);
   }
+} else if ($action == 'delete_favorite') {
+  $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
+  $photo_name = filter_input(INPUT_POST, 'photo_name', FILTER_SANITIZE_STRING);
+  $user_id = filter_input(INPUT_POST, 'user_id_to_unfavorite', FILTER_VALIDATE_INT);
+  $acting_user_id = get_user_id($_SESSION['logged_in']);//not a typo
+
+  if ($album_name == NULL || $album_name == FALSE ||
+      $photo_name == NULL || $photo_name == FALSE ||
+      $user_id == NULL || $user_id == FALSE ||
+      $acting_user_id == NULL || $acting_user_id == FALSE) {
+        echo "user_id: $user_id, acting_user_id: $acting_user_id";
+      echo "Error: Could not unfavorite $album_name/$photo_name.";
+  } else {
+    $user_id = get_user_id($_SESSION['logged_in']);
+    unfavorite($album_name, $photo_name, $user_id);
+    echo $album_name."/".$photo_name." unfavorited.";
+  }
+  $referer = $_SERVER['HTTP_REFERER'];
+  header("Refresh:3; url=$referer", true, 303);
 } else if ($action == 'review_favorites') {
   $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
 

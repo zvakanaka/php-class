@@ -26,6 +26,16 @@
               </form>
               <?php } else { echo "✗";}?>
               </td>
+              <td><form action="." method="post">
+                <input type="hidden" name="action" value="delete_favorite">
+                <input type="hidden" name="photo_name"
+                       value="<?php echo $fave['photo_name']; ?>">
+                 <input type="hidden" name="user_id_to_unfavorite"
+                        value="<?php echo $fave['user_id']; error_log($fave['user_id']);?>">
+               <input type="hidden" name="album_name"
+                      value="<?php echo $fave['album_name']; ?>">
+                <input type="submit" value="Unfavorite">
+            </form></td>
             </tr>
         <?php endforeach; ?>
     </table>
