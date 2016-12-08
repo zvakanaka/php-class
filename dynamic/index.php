@@ -5,6 +5,7 @@ require('model/user_db.php');
 require('model/photo_fs.php');
 require('lib/exec.php');
 require('lib/string_tools.php');
+require('lib/controller_helper.php');
 
 session_start();
 
@@ -13,14 +14,6 @@ if ($action == NULL) {
   $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
   if ($action == NULL) {
     $action = 'home';
-  }
-}
-
-function display_users() {
-  if (isset($_SESSION["is_admin"])) {
-    $users = get_users();
-    include('views/users.php');
-    die();
   }
 }
 
@@ -345,18 +338,21 @@ if ($action == 'register') {
   $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
   $photo_name = filter_input(INPUT_POST, 'photo_name', FILTER_SANITIZE_STRING);
   $user_id = filter_input(INPUT_POST, 'user_id_to_unfavorite', FILTER_VALIDATE_INT);
-  $acting_user_id = get_user_id($_SESSION['logged_in']);//not a typo
+  $acting_user_id = get_user_id($_SESSION['logged_in']);
 
   if ($album_name == NULL || $album_name == FALSE ||
       $photo_name == NULL || $photo_name == FALSE ||
       $user_id == NULL || $user_id == FALSE ||
       $acting_user_id == NULL || $acting_user_id == FALSE) {
         echo "user_id: $user_id, acting_user_id: $acting_user_id";
-      echo "Error: Could not unfavorite $album_name/$photo_name.";
+        echo "Error: Could not unfavorite $album_name/$photo_name.";
   } else {
-    $user_id = get_user_id($_SESSION['logged_in']);
-    unfavorite($album_name, $photo_name, $user_id);
-    echo $album_name."/".$photo_name." unfavorited.";
+    if ($user_id !== $acting_user_id || !isset($_SESSION['is_admin'])) {
+      unfavorite($album_name, $photo_name, $user_id);
+      echo $album_name."/".$photo_name." unfavorited.";
+    } else {
+      echo "Error: You do not have permission to unfavorite $album_name/$photo_name for this user.";
+    }
   }
   $referer = $_SERVER['HTTP_REFERER'];
   header("Refresh:1; url=$referer", true, 303);
