@@ -15,11 +15,15 @@ if [ ! -d $photo_dir/$1 ]; then
   echo "ERROR: $1 album does not exist"
   exit 1;
 fi
-remote_path="/home/$3/public_html/photo"
+port=22
 if [ ! -z $4 ]; then
-  $remote_path=$4
+  port=$4
+fi
+remote_path="/home/$3/photo"
+if [ ! -z $5 ]; then
+  remote_path=$5
 fi
 
 echo $(date) Uploading $1 to $3@$2 >> log.txt
-
-rsync -av --chown=www-data:www-data $photo_dir/$1 $3@$2:$remote_path/
+#options="--chown=www-data:www-data"
+rsync -av -e "ssh -p $port" $options $photo_dir/$1 $3@$2:$remote_path/

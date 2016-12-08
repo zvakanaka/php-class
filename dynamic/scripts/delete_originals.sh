@@ -12,6 +12,6 @@ echo $(date) Linking webs for $1  and overwriting originals $2 >> log.txt
 cd $photo_dir/$1/.web
 
 for f in *.webp; do
-  rm ../$f
+  rm ../${f%.*}*
   ln $f ../$f
 done

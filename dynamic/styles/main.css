@@ -49,6 +49,15 @@ form, article {
   background-color: #ccc;
 }
 
+table form {
+  background-color: #000;
+  padding: 0px;
+}
+
+td {
+  padding: 3px 4px;
+}
+
 pre {
 	border-radius: 5px;
 	padding: 5px;
@@ -143,7 +152,7 @@ main {
 }
 
 .logo { color: lime; }
-.blue { color: #03A; }
+.blue { color: #35C; }
 .lime { color: lime; }
 .blink {
   animation: blinky 1s linear infinite;

@@ -26,7 +26,7 @@ LOG=/home/pi/git/cronlog.txt
 ```
 ---
 ## Dependencies
-Photo-Gal requires `webp`, `rsync`, and `gphoto2` be installed on the server.
+Photo-Gal requires `webp`, `rsync`, `zip` and `gphoto2` be installed on the server.
 *Some versions of Linux may requre executing* `chmod +s $(which gphoto2)` *in order to allow use by the www-data user*
 
 ## Database

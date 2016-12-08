@@ -232,6 +232,7 @@ if ($action == 'register') {
   $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
   $server_name = filter_input(INPUT_POST, 'server_name', FILTER_SANITIZE_STRING);
   $album_name = filter_input(INPUT_POST, 'album_name', FILTER_SANITIZE_STRING);
+  $port = filter_input(INPUT_POST, 'port', FILTER_VALIDATE_INT);
 
   $photo_dir = "../../photo";
   $albums = get_albums($photo_dir, array());
@@ -243,7 +244,7 @@ if ($action == 'register') {
     include('views/dslr.php');
     die();
   } else {
-    $cmd = 'bash scripts/upload_to_server.sh '.escapeshellarg($album_name).' '.escapeshellarg($server_name).' '.escapeshellarg($username);
+    $cmd = 'bash scripts/upload_to_server.sh '.escapeshellarg($album_name).' '.escapeshellarg($server_name).' '.escapeshellarg($username).' '.escapeshellarg($port);
     shell_async($cmd);
     $message = "Breathe in. Breathe out. Repeat until ".$album_name." is uploaded to ".$server_name.".";
     include('views/dslr.php');
@@ -358,7 +359,7 @@ if ($action == 'register') {
     echo $album_name."/".$photo_name." unfavorited.";
   }
   $referer = $_SERVER['HTTP_REFERER'];
-  header("Refresh:3; url=$referer", true, 303);
+  header("Refresh:1; url=$referer", true, 303);
 } else if ($action == 'review_favorites') {
   $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
 

@@ -1,5 +1,13 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 <main>
+  <div class="singularity">
+    <p class="message">
+      ATTENTION: DO NOT SUBMIT ANY OF THESE FORMS NO MATTER WHO YOU ARE.
+    </p>
+    <p>
+      They are not for testing purposes, they are for adding batches of photos from a DSLR plugged into the server, and for adding thumbnails and web-optimized previews. All of this has been done already and repeating may be destructive.
+    </p>
+</div>
   <h1>Download from DSLR</h1>
   <form action="." method="post" id="download_form">
       <input type="hidden" name="action" value="download_from_dslr">
@@ -17,12 +25,10 @@
           <input type="hidden" name="action" value="optimize">
 
           <label>Optimization:</label>
-          <select name="optimization_type" required>
-            <option value="thumbs">Thumbnails</option>
-            <option value="webs">Webs</option>
-            <option value="delete_originals">Delete Originals</option>
-          </select>
           <br>
+          <input type="radio" name="optimization_type" value="thumbs">Thumbnails<br>
+          <input type="radio" name="optimization_type" value="webs">Webs<br>
+          <input type="radio" name="optimization_type" value="delete_originals">Delete Originals<br>
 
           <label>Album:</label>
           <select name="album_name">
@@ -50,6 +56,10 @@
 
         <label>User Name (On server):</label>
         <input type="text" name="username"<?php if(isset($username)) echo " value='$username'";?>/>
+        <br>
+
+       <label>Port:</label>
+        <input type="number" name="port"<?php if(isset($port)) echo " value='$port'";?>/>
         <br>
 
         <label>Album:</label>

@@ -13,7 +13,7 @@
         <br>
 
         <label>&nbsp;</label>
-        <input required type="submit" value="Login" />
+        <input type="submit" value="Login" />
         <br>
     </form>
     <h1>Register</h1>
