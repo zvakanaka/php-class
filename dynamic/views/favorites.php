@@ -28,15 +28,15 @@
     </table>
 </main>
 <?php if (isset($_SESSION['is_admin'])) { ?>
-<div class="singularity">
-  <h1>Zip Favorites</h1>
-  <a href="?action=zip_favorites&user_id=<?php echo $user_id;?>">Create Zip</a>
-</div>
-<?php if (filter_input(INPUT_GET, 'zip') != NULL) { ?>
-<div class="singularity">
-  <h1>Download Favorites</h1>
-  <p>You may download <a href="../../zips/<?php echo filter_input(INPUT_GET, 'zip');?>"><?php echo filter_input(INPUT_GET, 'zip');?></a> when it is ready.</p>
-</div>
-<?php } ?>
+  <div class="singularity">
+    <h1>Zip Favorites</h1>
+    <a href="?action=zip_favorites&user_id=<?php echo $user_id;?>">Create Zip</a>
+  </div>
+  <?php if (filter_input(INPUT_GET, 'zip') != NULL) { ?>
+      <div class="singularity">
+        <h1>Download Favorites</h1>
+        <p>You may download <a href="../../zips/<?php echo filter_input(INPUT_GET, 'zip');?>"><?php echo filter_input(INPUT_GET, 'zip');?></a> when it is ready.</p>
+      </div>
+  <?php } ?>
 <?php } ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>

@@ -14,8 +14,8 @@
 
 </main>
 
-<?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
-  if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
+<?php if (isset($_SESSION['is_admin'])) {
+  if ($show_hidden == NULL) { ?>
     <div class="singularity">
       <a href="?action=album&album=<?php echo $album;?>&hidden=true">Show Hidden Photos</a>
     </div>
@@ -44,11 +44,9 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/toes.php'; ?>
 
 <!-- if query string photo, open lightbox for it -->
-<?php if (filter_input(INPUT_GET, 'photo')) {
-  $photo = filter_input(INPUT_GET, 'photo');
-?>
+<?php if ($qs_photo !== NULL) { ?>
     <script type="text/javascript">
-      var thumbToClick = document.getElementById('<?php echo "thumb-".$photo;?>');
+      var thumbToClick = document.getElementById('<?php echo "thumb-".$qs_photo;?>');
       thumbToClick.click();
     </script>
 <?php } ?>

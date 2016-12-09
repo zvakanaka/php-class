@@ -10,15 +10,18 @@
         </tr>
         <?php foreach ($users as $user) : ?>
             <tr>
-              <td><a href="?action=review_favorites&user_id=<?php echo $user['user_id'];?>"><?php echo $user['username']; ?></a></td>
+              <td>
+                <a href="?action=review_favorites&user_id=<?php echo $user['user_id'];?>"><?php echo $user['username']; ?></a>
+              </td>
               <td><?php echo $user['email']; ?></td>
               <td><?php echo ($user['is_admin'] == 1) ? "✓" : "✗";?></td>
-              <td><form action="." method="post">
+              <td>
+                <form action="." method="post">
                   <input type="hidden" name="action" value="delete_user">
-                  <input type="hidden" name="user_id"
-                         value="<?php echo $user['user_id']; ?>">
+                  <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
                   <input type="submit" value="Delete">
-              </form></td>
+              </form>
+            </td>
             </tr>
         <?php endforeach; ?>
     </table>

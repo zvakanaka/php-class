@@ -28,6 +28,7 @@ if ($action == 'register') {
   }
   $photo_dir = "../../photo";
   $show_hidden = filter_input(INPUT_GET, 'hidden', FILTER_SANITIZE_STRING);
+  $qs_photo = filter_input(INPUT_GET, 'photo', FILTER_SANITIZE_STRING);
   if ($show_hidden == 'true') {
     $albums = get_albums($photo_dir, array());
     include('views/home.php');
@@ -40,7 +41,7 @@ if ($action == 'register') {
 } else if ($action == 'users') {
   display_users();
 } else if ($action == 'insert_user') {
-  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
   $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
   $username = filter_input(INPUT_POST, 'new-username', FILTER_SANITIZE_STRING);
@@ -102,6 +103,7 @@ if ($action == 'register') {
     $message = "This album is unlisted. Anyone with the link can see it.";
   }
   $photo_dir = "../../photo";
+  $qs_photo = filter_input(INPUT_GET, 'photo', FILTER_SANITIZE_STRING);
   $show_hidden = filter_input(INPUT_GET, 'hidden', FILTER_SANITIZE_STRING);
   if ($show_hidden == 'true') {
     $images = get_images($photo_dir, $album, array());

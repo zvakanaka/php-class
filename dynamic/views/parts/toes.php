@@ -2,6 +2,7 @@
   <?php $gitHub = substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], "/")); ?>
   <a href="https://github.com/zvakanaka/php-class/blob/master/dynamic<?php echo $gitHub;?>">Code on GitHub</a>
   <a href="/php-class/assignments.php">Exercises</a>
+  <a href="https://youtu.be/RNfa17T6CVA">Video</a>
 
   <span id="timestampy"><?php echo 'Last updated: <time datetime="'. date('c') . '">' . date('F j, Y', getlastmod()) . '</time>'; ?></span>
 
