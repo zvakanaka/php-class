@@ -1,7 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 
 <main>
-
+<h1>Albums</h1>
 <?php foreach ($albums as $album) { ?>
   <div class="album-thumb">
     <a class="thumb-link" href="?action=album&amp;album=<?php echo $album;?>">
@@ -13,7 +13,8 @@
   </div>
 <?php } ?>
 
-<?php if (isset($_SESSION['is_admin'])) {
+<?php if (isset($_SESSION['is_admin'])) { ?>
+<?php
   if (filter_input(INPUT_GET, "hidden") == NULL) { ?>
     <div class="singularity">
       <a href="?action=home&hidden=true">Show Hidden Albums</a>
