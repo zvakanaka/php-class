@@ -1,6 +1,6 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/php-class/dynamic/views/parts/head.php'; ?>
 <main>
-    <h1>Favorites for <a href="mailto:<?php echo get_user_email($user_id);?>"><?php echo get_user_name($user_id);?></a></h1>
+    <h1>Manage Favorites for <a href="mailto:<?php echo get_user_email($user_id);?>"><?php echo get_user_name($user_id);?></a></h1>
     <table>
         <tr>
           <th>Image</th>

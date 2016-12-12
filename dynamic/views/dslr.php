@@ -8,7 +8,8 @@
       They are not for testing purposes, they are for adding batches of photos from a DSLR plugged into the server, and for adding thumbnails and web-optimized previews. All of this has been done already and repeating may be destructive.
     </p>
 </div>
-  <h1>Download from DSLR</h1>
+<h1>Server Management</h1>
+  <h2>Download from DSLR</h2>
   <form action="." method="post" id="download_form">
       <input type="hidden" name="action" value="download_from_dslr">
 
@@ -20,7 +21,7 @@
       <input type="submit" value="Download" />
       <br>
   </form>
-  <h1>Image Optimizations</h1>
+  <h2>Image Optimizations</h2>
       <form action="." method="post" id="thumb_form">
           <input type="hidden" name="action" value="optimize">
 
@@ -46,7 +47,7 @@
           <br>
       </form>
 
-    <h1>Upload to Server</h1>
+    <h2>Upload to Server</h2>
     <form action="." method="post" id="upload_form">
         <input type="hidden" name="action" value="upload_to_server">
 

@@ -126,6 +126,29 @@ img.thumb {
   box-shadow: 1px 3px 8px rgba(0,0,0,0.5);
 }
 
+div.album-thumb {
+  border: 1px solid black;
+  box-shadow: 1px 3px 8px rgba(0,0,0,0.5);
+  background-color: #ddd;
+  margin: 5px;
+  float: left;
+  width: 180px;
+}
+
+div.album-thumb:hover, img.thumb:hover {
+  border: 1px solid #ccc;
+}
+
+.album-img {
+  width: 100%;
+  height: auto;
+}
+
+div.album-desc {
+  padding: 6px;
+  text-align: center;
+}
+
 .thumb-link {
   text-decoration: none;
 }
@@ -187,14 +210,28 @@ main {
     border: none;
   }
   .thumb {
-    width: 31%;
+    width: 47%;
     height: auto;
+  }
+  div.album-thumb {
+    background-color: #ddd;
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 46%;
   }
 }
 
 @media screen and (max-aspect-ratio: 1/2) {
   .thumb {
-    width: 48%;
+    width: 94%;
     height: auto;
+  }
+  div.album-thumb {
+    background-color: #ddd;
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 94%;
   }
 }
